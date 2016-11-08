@@ -32,4 +32,5 @@
         android:layout_marginBottom="19dp"
         android:id="@+id/floatingActionButton"
         app:backgroundTint="?attr/colorPrimary" />
+
 </RelativeLayout>

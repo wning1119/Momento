@@ -1,5 +1,6 @@
 package com.example.sungyup.cs130;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
@@ -9,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.support.design.widget.FloatingActionButton;
+import android.view.View;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +23,12 @@ public class MainActivity extends AppCompatActivity {
 //        setSupportActionBar(myToolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         fab.setImageResource(R.drawable.ic_action_add);
+        fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                goToNewPost();
+            }
+        });
     }
 
     @Override
@@ -32,10 +41,39 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         switch(id){
-            case R.id.action_submenu:
+            case R.id.action_allPosts:
+                return true;
+            case R.id.action_favorites:
+                goToFavoriteActivity();
+                return true;
+            case R.id.action_myPosts:
+                goToMyPostsActivity();
+                return true;
+            case R.id.action_logout:
+                goToLogin();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void goToFavoriteActivity(){
+        Intent intent = new Intent(this, FavoritesActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToMyPostsActivity(){
+        Intent intent = new Intent(this, MyPostsActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToLogin(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToNewPost(){
+        Intent intent = new Intent(this, NewPostActivity.class);
+        startActivity(intent);
     }
 }

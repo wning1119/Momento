@@ -28,10 +28,19 @@
                 <action android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:label="Around You">
-        </activity>
-
+        <activity
+            android:name=".MainActivity"
+            android:label="Around You" />
+        <activity
+            android:name=".FavoritesActivity"
+            android:label="Favorites" />
+        <activity
+            android:name=".MyPostsActivity"
+            android:label="My Posts" />
+        <activity
+            android:name=".NewPostActivity"
+            android:label="Share a Thought" />
+        <activity android:name=".activity_viewposts"></activity>
     </application>
 
 </manifest>

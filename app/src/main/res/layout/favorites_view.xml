@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="MM DD, YYYY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSubject"
+        android:layout_alignStart="@+id/txtSubject"
+        android:layout_marginTop="12dp"
+        android:id="@+id/txtDate"
+        android:ems="10" />
+
+    <TextView
+        android:text="Subjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="24dp"
+        android:textSize="24sp"
+        android:textColor="#000000"
+        android:id="@+id/txtSubject"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Content Content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtContent"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:ems="15"
+        android:layout_above="@+id/txtDate"
+        android:layout_toEndOf="@+id/txtSubject"
+        android:layout_marginStart="31dp" />
+</RelativeLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "599725246955",
+    "firebase_url": "https://momento-758c2.firebaseio.com",
+    "project_id": "momento-758c2",
+    "storage_bucket": "momento-758c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599725246955:android:1c87dbb46c495037",
+        "android_client_info": {
+          "package_name": "com.example.ningwang.momento"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599725246955-6lcfp7lbpprkrma3j4mddbvbis3q2r6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyIaHp-IPVd5vZsqsq_tCoTgU3AOGyPcA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

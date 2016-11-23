@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,28 +20,34 @@ public class Post {
         latitude = null;
         category = new ArrayList<>();
         replies = new ArrayList<>();
-        owner = null;
+        ownerId = -1;
         id = -1;
     }
 
-    public void printPost()
+    public Post(int favorite, int timeout, String subject, String detail,
+                Timestamp timestamp, String longitude, String latitude,
+                ArrayList<String> category, ArrayList<Reply> replies,
+                int ownerId, int id)
     {
-        System.out.println("Owner is: " + owner.getUser_name() + " " + owner.getUser_id());
-        System.out.println("Favorite # is: " + favorite);
-        System.out.println("Timeout is: " + timeout);
-        System.out.println("Detail is: " + detail);
-        System.out.println("Timestamp is: " + timestamp);
-        for (int i = 0; i < replies.size(); i++)
-        {
-            Reply reply = replies.get(i);
-            reply.printReply();
-        }
+        this.favorite = favorite;
+        this.timeout = timeout;
+        this.subject = subject;
+        this.detail = detail;
+        this.timestamp = timestamp;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.category = category;
+        this.replies = replies;
+        this.ownerId = ownerId;
+        this.id = id;
     }
 
-    public void setOwner(User owner)
+    public void setOwner(int ownerId)
     {
-        this.owner = owner;
+        this.ownerId = ownerId;
     }
+
+    public int getOwner() {return ownerId; }
 
     // get # of favorites
     public int getFavorite() { return favorite; }
@@ -146,7 +153,7 @@ public class Post {
     private String latitude;
     private ArrayList<String> category;
     private ArrayList<Reply> replies;
-    private User owner;
+    private int ownerId;
     private int id;
 
 }

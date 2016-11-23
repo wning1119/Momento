@@ -6,24 +6,29 @@ import java.util.Date;
  */
 // Reply Class
 public class Reply{
-    public Reply(User owner, String content)
+    public Reply(int ownerId, String content)
     {
-        this.owner = owner;
+        this.ownerId = ownerId;
         this.content = content;
         Date date = new Date();
         timestamp = new Timestamp(date.getTime());
         id = -1;
     }
 
-    public void printReply()
+    public Reply()
     {
-        System.out.println("reply information");
-        System.out.print("owner is: " + owner.getUser_id() + " " + owner.getUser_name() + ". ");
-        System.out.print("content is: " + content + ". ");
-        System.out.println("timestamp is: " + timestamp + ".");
+        this.ownerId = -1;
+        this.content = null;
+        Date date = new Date();
+        timestamp = new Timestamp(date.getTime());
+        id = -1;
     }
 
-    public User getOwner() { return owner; }
+    public void setTimestamp(Timestamp timestamp) { this.timestamp = timestamp; }
+
+    public void setOwner(int ownerId) { this.ownerId = ownerId; }
+
+    public int getOwner() { return ownerId; }
 
     public String getContent() { return content; }
 
@@ -33,7 +38,7 @@ public class Reply{
 
     public int getId() { return id; }
 
-    private User owner;
+    private int ownerId;
     private String content;
     private Timestamp timestamp;
     private int id;

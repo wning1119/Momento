@@ -34,7 +34,7 @@ public class User{
         Post post = new Post();
         post.setDetail(content);
         post.setTimestamp();
-        post.setOwner(this);
+        post.setOwner(user_id);
         my_posts.add(post);
         return post;
     }
@@ -53,7 +53,7 @@ public class User{
 
     public void replyToPost(Post post, String content)
     {
-        Reply reply = new Reply(this, content);
+        Reply reply = new Reply(user_id, content);
         post.addToReplies(reply);
     }
 

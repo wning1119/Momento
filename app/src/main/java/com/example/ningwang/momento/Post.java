@@ -47,7 +47,7 @@ public class Post {
         this.ownerId = ownerId;
     }
 
-    public int getOwner() {return ownerId; }
+    public int getOwner() { return ownerId; }
 
     // get # of favorites
     public int getFavorite() { return favorite; }
@@ -61,6 +61,10 @@ public class Post {
         if (favorite > 0)
             favorite--;
     }
+
+    public void setFavorite(int favorite) { this.favorite = favorite; }
+
+    public void setCategory(ArrayList<String> category) { this.category = category; }
 
     // set timeout
     public void setTimeout(int timeout) { this.timeout = timeout; }

@@ -1,17 +1,12 @@
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
-import javax.imageio.ImageIO;
-
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
@@ -22,36 +17,15 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.ItemCollection;
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
-import com.amazonaws.services.dynamodbv2.document.UpdateItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
-import com.amazonaws.services.dynamodbv2.model.AttributeDefinition;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
-import com.amazonaws.services.dynamodbv2.model.Condition;
-import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
-import com.amazonaws.services.dynamodbv2.model.DescribeTableRequest;
-import com.amazonaws.services.dynamodbv2.model.KeySchemaElement;
-import com.amazonaws.services.dynamodbv2.model.KeyType;
-import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
-import com.amazonaws.services.dynamodbv2.model.PutItemRequest;
-import com.amazonaws.services.dynamodbv2.model.PutItemResult;
-import com.amazonaws.services.dynamodbv2.model.QueryRequest;
-import com.amazonaws.services.dynamodbv2.model.QueryResult;
-import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType;
-import com.amazonaws.services.dynamodbv2.model.ScanRequest;
-import com.amazonaws.services.dynamodbv2.model.ScanResult;
-import com.amazonaws.services.dynamodbv2.model.TableDescription;
-import com.amazonaws.services.dynamodbv2.util.TableUtils;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import com.amazonaws.util.IOUtils;
@@ -92,13 +66,30 @@ public class DatabaseAPIs {
 
         try {
             //TSET ONLY!!!
-        	String id = "123@ucla.edu";
-            String password = "123456";
-            writePasswordToDB(id, password);
-            String result = getPasswordForUser(id);
-            System.out.println("Password: " + result);
+        	User u = new User();
+        	u.setUserInfo(12, "Ye");
+        	Post p = new Post();
+        	p.setSubject("Welcome to CS130");
+        	p.setDetail("hello");
+        	p.setTimestamp();
+        	p.setLocation("11.10", "11.23");
+        	p.setOwner(12);
+        	ArrayList<String> c = new ArrayList();
+        	c.add("study");
+        	c.add("nerd");
+        	p.setCategory(c);
+        	
+        	writePostToDB(u,p);
+        	
+            //test reply api
+        	p.setId(1);//need to set id here because post is not returned by db
+            Reply r = new Reply(9,"that's awesome!");
+            r.setTimestamp();
+            
+            addReplyToPost(p,r);
             
             
+            System.out.println("Success!");
             
         } catch (AmazonServiceException ase) {
             System.out.println(ase.toString());
@@ -122,12 +113,22 @@ public class DatabaseAPIs {
     	//add to post table
     	String postTableName = "Post";
     	Table postTable = dynamoDB.getTable(postTableName);
-    	PutItemOutcome outcome = postTable.putItem(new Item()
+    	postTable.putItem(new Item()
     			.withPrimaryKey("postId",postCount)
     			.withString("subject", post.getSubject())
     			.withString("detail", post.getDetail())
+    			.withInt("favorite", post.getFavorite())
+    			.withInt("timeout", post.getTimeout())
+    			.withString("Timestamp",post.getTimestamp().toString())
+    			.withString("longitude", post.getLongitude())
+    			.withString("latitude", post.getLatitude())
+    			.withList("category", post.getCategory())
+    			.withList("replyIds", new ArrayList())
+    			.withInt("ownerId", post.getOwner())
     			);
         
+    	/* 
+    	//Removed, no need to store my posts, it will be stored locally 
     	//add to user-mypost table
     	String myPostTableName = "MyPost";
     	Table myPostTable = dynamoDB.getTable(myPostTableName);
@@ -135,10 +136,10 @@ public class DatabaseAPIs {
     	QuerySpec spec = new QuerySpec()
                 .withKeyConditionExpression("userId = :id")
                 .withValueMap(new ValueMap()
-                		.withString(":id", user.getUser_id()));
+                		.withInt(":id", user.getUser_id()));
         ItemCollection<QueryOutcome> items = myPostTable.query(spec);
         Iterator<Item> iterator = items.iterator();
-        List<Integer> posts;
+        List<Integer> posts = null;
         while (iterator.hasNext()) {
         	posts = iterator.next().getList("postIds"); 
         }
@@ -149,7 +150,8 @@ public class DatabaseAPIs {
     			.withUpdateExpression("set postIds = :l")
     			.withValueMap(new ValueMap()
     					.withList(":l",posts));
-        UpdateItemOutcome updateoutcome = myPostTable.updateItem(updateItemSpec);
+        myPostTable.updateItem(updateItemSpec);
+    	*/
     	
     	//add to category-post table
     	String postInCategoryTableName = "PostInCategory";
@@ -157,24 +159,25 @@ public class DatabaseAPIs {
     	ArrayList<String> categories = post.getCategory();
     	for(String category:categories){
     		//firstly query table to get current category
-        	QuerySpec spec2 = new QuerySpec()
+        	QuerySpec spec = new QuerySpec()
                     .withKeyConditionExpression("category = :c")
                     .withValueMap(new ValueMap()
                     		.withString(":c", category));
-            ItemCollection<QueryOutcome> items2 = postInCategoryTable.query(spec2);
-            Iterator<Item> iterator2 = items2.iterator();
-            List<Integer> posts2;
+            ItemCollection<QueryOutcome> items = postInCategoryTable.query(spec);
+            Iterator<Item> iterator = items.iterator();
+            List<Integer> posts = new ArrayList();
             while (iterator.hasNext()) {
-            	posts2 = iterator.next().getList("postIds"); 
+            	posts = iterator.next().getList("postIds"); 
             }
             posts.add(postCount); //add it to result
             //update table
-            UpdateItemSpec updateItemSpec2 = new UpdateItemSpec()
+            UpdateItemSpec updateItemSpec = new UpdateItemSpec()
         			.withPrimaryKey("category",category)
         			.withUpdateExpression("set postIds = :l")
         			.withValueMap(new ValueMap()
-        					.withList(":l",posts2));
-            UpdateItemOutcome updateoutcome2 = postInCategoryTable.updateItem(updateItemSpec2);
+        					.withList(":l",posts));
+            postInCategoryTable.updateItem(updateItemSpec);
+    	}
     }
     
     
@@ -192,10 +195,11 @@ public class DatabaseAPIs {
     	//write reply into Reply table with reply id
     	String replyTableName = "Reply";
     	Table replyTable = dynamoDB.getTable(replyTableName);
-    	PutItemOutcome outcome = replyTable.putItem(new Item()
+    	replyTable.putItem(new Item()
     			.withPrimaryKey("replyId",replyCount)
-    			.withString("onwer", reply.getOwner().getUser_id())
+    			.withInt("onwerId", reply.getOwner())
     			.withString("content", reply.getContent())
+    			.withString("timestamp", reply.getTimestamp().toString())
     			);
     	
     	//add the reply id to the Reply field in this post
@@ -205,21 +209,65 @@ public class DatabaseAPIs {
     	QuerySpec spec = new QuerySpec()
                 .withKeyConditionExpression("postId = :id")
                 .withValueMap(new ValueMap()
-                		.withString(":id", post.getid????));
-        ItemCollection<QueryOutcome> items = myPostTable.query(spec);
+                		.withInt(":id", post.getId()));
+        ItemCollection<QueryOutcome> items = postTable.query(spec);
         Iterator<Item> iterator = items.iterator();
-        List<Integer> posts;
+        List<Integer> replies = null;
         while (iterator.hasNext()) {
-        	posts = iterator.next().getList("postIds"); 
+        	replies = iterator.next().getList("replyIds"); 
         }
-        posts.add(postCount); //add it to result
+        if(replies==null)
+        	replies = new ArrayList();
+        replies.add(replyCount); //add it to result
         //update table
         UpdateItemSpec updateItemSpec = new UpdateItemSpec()
-    			.withPrimaryKey("userId",user.getUser_id())
-    			.withUpdateExpression("set postIds = :l")
+        		.withPrimaryKey("postId",post.getId())
+    			.withUpdateExpression("set replyIds = :l")
     			.withValueMap(new ValueMap()
-    					.withList(":l",posts));
-        UpdateItemOutcome updateoutcome = myPostTable.updateItem(updateItemSpec);
+    					.withList(":l",replies));
+        postTable.updateItem(updateItemSpec);
+    }
+    
+    /**
+     * get the current reply of this post
+     * <p>
+     * 
+     * @param post
+     */
+    public static List<Reply> getReplyForPost(Post post){
+    	String postTableName = "Post";
+    	Table postTable = dynamoDB.getTable(postTableName);
+    	//firstly query table to get current mypost
+    	QuerySpec spec = new QuerySpec()
+                .withKeyConditionExpression("postId = :id")
+                .withValueMap(new ValueMap()
+                		.withInt(":id", post.getId()));
+        ItemCollection<QueryOutcome> items = postTable.query(spec);
+        Iterator<Item> iterator = items.iterator();
+        List<Integer> replyIds = null;
+        while (iterator.hasNext()) {
+        	replyIds = iterator.next().getList("replyIds"); 
+        }
+        List<Reply> replies = null;
+        for(int id:replyIds){
+        	//query the Reply table, get corresponding reply, add to list
+        	String replyTableName = "Reply";
+        	Table replyTable = dynamoDB.getTable(replyTableName);
+        	Reply r = new Reply();
+        	//query Reply table
+        	QuerySpec spec1 = new QuerySpec()
+                    .withKeyConditionExpression("replyId = :id")
+                    .withValueMap(new ValueMap()
+                    		.withInt(":id", id));
+            ItemCollection<QueryOutcome> items1 = replyTable.query(spec1);
+            Iterator<Item> iterator1 = items1.iterator();
+            while (iterator1.hasNext()) {
+            	r.setId(id);
+            	r.setOwner(iterator.next().getInt("ownerId")); 
+            }
+        	replies.add(r);
+        }
+        return replies;
     }
     
 
@@ -244,16 +292,15 @@ public class DatabaseAPIs {
      * @return URL
      * @throws InterruptedException 
      */
-    public static String storeImageToS3(BufferedImage image) throws InterruptedException{
+    public static String storeImageToS3(File image) throws InterruptedException{
     	 String existingBucketName = "*** Provide existing bucket name ***";
-         String keyName            = "*** Provide object key ***";
-         String filePath           = "*** Path to and name of the file to upload ***";  
+         String keyName            = "*** Provide object key ***";  
          
          TransferManager tm = new TransferManager(new ProfileCredentialsProvider());        
          // TransferManager processes all transfers asynchronously, 
          // so this call will return immediately.
          Upload upload = tm.upload(
-         		existingBucketName, keyName, new File(filePath));
+         		existingBucketName, keyName, image);
          
          try {
          	// Or you can block and wait for the upload to finish
@@ -273,7 +320,7 @@ public class DatabaseAPIs {
      * @throws IOException 
      * @throws FileNotFoundException 
      */
-    public static BufferedImage getImageFromS3(String url) throws FileNotFoundException, IOException{    	
+    public static File getImageFromS3(String url) throws FileNotFoundException, IOException{    	
     	//http://www.javaroots.com/2013/05/how-to-upload-and-download-images-in.html
     	AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider());   
     	String existingBucketName = "*** Provide existing bucket name ***";
@@ -282,12 +329,11 @@ public class DatabaseAPIs {
     	                  new GetObjectRequest(existingBucketName, keyName));
     	
     	InputStream objectData = object.getObjectContent();
-    	//transform to BufferedImage
-    	BufferedImage image = null;
-        if (objectData != null) {
-            image = ImageIO.read(objectData);
-        }
-        return image;    	
+    	File file = null;
+    	OutputStream outputStream = new FileOutputStream(file);
+    	IOUtils.copy(objectData, outputStream);
+    	outputStream.close();
+        return file;    	
     }
     
     
@@ -304,6 +350,7 @@ public class DatabaseAPIs {
      * @param category
      * @return List of Post
      */
+    /*
     public static List<Post> searchPostsWithCategory(String category){
     	//search the category-post table and get the list of posts
     }
@@ -316,6 +363,7 @@ public class DatabaseAPIs {
      * @param keyword
      * @return List of Post
      */
+    /*
     public static List<Post> searchPostsWithKeyword(String keyword){
     	
     }
@@ -331,8 +379,10 @@ public class DatabaseAPIs {
      * @param highlongitude
      * @return List of Post
      */
+    /*
     public static List<Post> searchPostsWithLocation(String lowlatitude,
     		String highlatitude, String lowlongitude, String highlongitude){
     	//when searching, check the remaining time and only return valid posts
     }
+    */
 }

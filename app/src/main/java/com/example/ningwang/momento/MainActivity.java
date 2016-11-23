@@ -1,12 +1,17 @@
-package com.example.ningwang.momento;
+package com.example.sungyup.cs130;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.support.design.widget.FloatingActionButton;
+import android.view.View;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void btnClickedViewPost(View view){
+        Intent intent = new Intent(this, activity_viewposts.class);
+        startActivity(intent);
     }
 
     private void goToFavoriteActivity(){

@@ -8,6 +8,11 @@ import org.junit.Test;
 public class ReplyTest extends TestCase {
     private static Reply reply;
 
+    public ReplyTest(String name)
+    {
+        super(name);
+    }
+
     @BeforeClass
     public void setUp() {
         reply = new Reply();

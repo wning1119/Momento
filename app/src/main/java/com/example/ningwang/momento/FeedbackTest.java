@@ -8,6 +8,11 @@ import org.junit.Test;
 public class FeedbackTest extends TestCase {
     private static Feedback feedback;
 
+    public FeedbackTest(String name)
+    {
+        super(name);
+    }
+
     @BeforeClass
     public void setUp()
     {

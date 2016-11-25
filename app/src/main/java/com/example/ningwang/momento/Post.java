@@ -101,6 +101,11 @@ public class Post {
         timestamp = new Timestamp(date.getTime());
     }
 
+    public void setTimestamp(Timestamp timestamp)
+    {
+        this.timestamp = timestamp;
+    }
+
     // get timestamp
     public Timestamp getTimestamp() { return timestamp; }
 

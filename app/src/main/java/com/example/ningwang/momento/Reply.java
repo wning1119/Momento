@@ -24,7 +24,16 @@ public class Reply{
         id = -1;
     }
 
-    public void setTimestamp(Timestamp timestamp) { this.timestamp = timestamp; }
+    public void setTimestamp()
+    {
+        Date date = new Date();
+        timestamp = new Timestamp(date.getTime());
+    }
+
+    public void setTimestamp(Timestamp timestamp)
+    {
+        this.timestamp = timestamp;
+    }
 
     public void setOwner(int ownerId) { this.ownerId = ownerId; }
 

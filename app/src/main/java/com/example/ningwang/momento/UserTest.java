@@ -8,6 +8,11 @@ import org.junit.Test;
 public class UserTest extends TestCase {
     private static User user;
 
+    public UserTest(String name)
+    {
+        super(name);
+    }
+
     @BeforeClass
     public void setUp()
     {

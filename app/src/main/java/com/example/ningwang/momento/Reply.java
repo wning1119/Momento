@@ -41,6 +41,8 @@ public class Reply{
 
     public String getContent() { return content; }
 
+    public void setContent(String content) { this.content = content; }
+
     public Timestamp getTimestamp() { return timestamp; }
 
     public void setId(int id) { this.id = id; }

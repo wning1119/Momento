@@ -1,4 +1,4 @@
-package com.example.sungyup.cs130;
+package com.example.ningwang.momento;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,14 +8,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class activity_viewposts extends AppCompatActivity {
     private List<MyPosts> myPosts = new ArrayList<MyPosts>();
+    private ImageButton fav;
+    private EditText commentBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,22 @@ public class activity_viewposts extends AppCompatActivity {
 
         populatePostList();
         populateListView();
+
+        fav = (ImageButton) findViewById(R.id.favButton);
+        fav.setImageResource(android.R.drawable.btn_star_big_off);
+    }
+
+    public void favButtonClicked(View v){
+        fav.setImageResource(android.R.drawable.btn_star_big_on);
+    }
+
+    public void addComment(View v){
+        commentBox = (EditText)findViewById(R.id.comment);
+        String comment = commentBox.getText().toString();
+        if(!comment.equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(), comment, Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     private void populatePostList() {

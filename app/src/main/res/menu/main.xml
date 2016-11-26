@@ -6,9 +6,14 @@
         <!--app:showAsAction="always"-->
         <!--android:layout_gravity="left"-->
         <!--/>-->
+    <item android:id="@+id/search"
+        android:title="Search"
+        android:icon="@drawable/ic_search"
+        android:showAsAction="collapseActionView|ifRoom"
+        android:actionViewClass="android.widget.SearchView" />
     <item android:id="@+id/action_allPosts"
-    android:title="All Posts"
-    app:showAsAction="never"/>
+        android:title="All Posts"
+        app:showAsAction="never"/>
     <item android:id="@+id/action_favorites"
         android:title="Favorites"
         app:showAsAction="never"/>

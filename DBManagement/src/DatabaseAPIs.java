@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
@@ -69,7 +71,7 @@ public class DatabaseAPIs {
     public static void main(String[] args) throws Exception {
         init();
 
-        try {
+        try {        	
             //TSET ONLY!!!
         	User u = new User();
         	u.setUserInfo(12, "Ye");
@@ -79,7 +81,7 @@ public class DatabaseAPIs {
         	p.setTimestamp();
         	p.setLocation(11.10, 11.23);
         	p.setOwner(12);
-        	ArrayList<String> c = new ArrayList();
+        	ArrayList<String> c = new ArrayList<>();
         	c.add("study");
         	c.add("nerd");
         	p.setCategory(c);
@@ -93,6 +95,8 @@ public class DatabaseAPIs {
             
             addReplyToPost(p,r);
             
+            favoritePost(u,p);
+            favoritePost(u,p);//favorite twice, the num of favorite should be 2
             
             //test getReplyForPost API
             List<Reply> l = getReplyForPost(p);
@@ -112,6 +116,30 @@ public class DatabaseAPIs {
             	System.out.println(po.getOwner()+"\n");
             	System.out.println(po.getTimestamp()+"\n");
             	System.out.println(po.getDetail()+"\n");
+            	System.out.println(po.getReplies().get(0).getContent()+"\n");
+            }
+            
+            
+            //test search with category function
+            System.out.println("Result for search category function:"+"\n");
+            List<Post> list2 = searchPostsWithCategory("study");
+            for(Post po:list2){
+            	System.out.println(po.getId()+"\n");
+            	System.out.println(po.getOwner()+"\n");
+            	System.out.println(po.getTimestamp()+"\n");
+            	System.out.println(po.getDetail()+"\n");
+            	System.out.println(po.getReplies().get(0).getContent()+"\n");
+            }
+            
+          //test search with category function
+            System.out.println("Result for search keyword function:"+"\n");
+            List<Post> list3 = searchPostsWithKeyword("CS130");
+            for(Post po:list3){
+            	System.out.println(po.getId()+"\n");
+            	System.out.println(po.getOwner()+"\n");
+            	System.out.println(po.getTimestamp()+"\n");
+            	System.out.println(po.getDetail()+"\n");
+            	System.out.println(po.getReplies().get(0).getContent()+"\n");
             }
             
             System.out.println("Success!");
@@ -148,7 +176,7 @@ public class DatabaseAPIs {
     			.withDouble("longitude", post.getLongitude())
     			.withDouble("latitude", post.getLatitude())
     			.withList("category", post.getCategory())
-    			.withList("replyIds", new ArrayList())
+    			.withList("replyIds", new ArrayList<>())
     			.withInt("ownerId", post.getOwner())
     			);
         
@@ -190,7 +218,7 @@ public class DatabaseAPIs {
                     		.withString(":c", category));
             ItemCollection<QueryOutcome> items = postInCategoryTable.query(spec);
             Iterator<Item> iterator = items.iterator();
-            List<Integer> posts = new ArrayList();
+            List<Integer> posts = new ArrayList<>();
             while (iterator.hasNext()) {
             	posts = iterator.next().getList("postIds"); 
             }
@@ -230,7 +258,7 @@ public class DatabaseAPIs {
     	//add the reply id to the Reply field in this post
     	String postTableName = "Post";
     	Table postTable = dynamoDB.getTable(postTableName);
-    	//firstly query table to get current mypost
+    	//firstly query table to get current replies
     	QuerySpec spec = new QuerySpec()
                 .withKeyConditionExpression("postId = :id")
                 .withValueMap(new ValueMap()
@@ -242,7 +270,7 @@ public class DatabaseAPIs {
         	replies = iterator.next().getList("replyIds"); 
         }
         if(replies==null)
-        	replies = new ArrayList();
+        	replies = new ArrayList<>();
         replies.add(replyCount); //add it to result
         //update table
         UpdateItemSpec updateItemSpec = new UpdateItemSpec()
@@ -262,18 +290,18 @@ public class DatabaseAPIs {
     public static List<Reply> getReplyForPost(Post post){
     	String postTableName = "Post";
     	Table postTable = dynamoDB.getTable(postTableName);
-    	//firstly query table to get current mypost
+    	//firstly query table to get current replies
     	QuerySpec spec = new QuerySpec()
                 .withKeyConditionExpression("postId = :id")
                 .withValueMap(new ValueMap()
                 		.withInt(":id", post.getId()));
         ItemCollection<QueryOutcome> items = postTable.query(spec);
         Iterator<Item> iterator = items.iterator();
-        List<Integer> replyIds = new ArrayList();
+        List<Integer> replyIds = new ArrayList<>();
         while (iterator.hasNext()) {
         	replyIds = iterator.next().getList("replyIds"); 
         }
-        List<Reply> replies = new ArrayList();
+        List<Reply> replies = new ArrayList<>();
         Iterator it = replyIds.iterator();
         while(it.hasNext()){        	
         	BigDecimal b= (BigDecimal) it.next();//Integer.parseInt(s);
@@ -311,7 +339,27 @@ public class DatabaseAPIs {
      */
     public static void favoritePost(User user, Post post){
     	//add the number of favorties in this post by 1
-    	
+    	String postTableName = "Post";
+    	Table postTable = dynamoDB.getTable(postTableName);
+    	//firstly query table to get current num of favorite
+    	QuerySpec spec = new QuerySpec()
+                .withKeyConditionExpression("postId = :id")
+                .withValueMap(new ValueMap()
+                		.withInt(":id", post.getId()));
+        ItemCollection<QueryOutcome> items = postTable.query(spec);
+        Iterator<Item> iterator = items.iterator();
+        int favorite = 0;
+        while (iterator.hasNext()) {
+        	favorite = iterator.next().getInt("favorite"); 
+        }
+        favorite++; //add it to result
+        //update table
+        UpdateItemSpec updateItemSpec = new UpdateItemSpec()
+        		.withPrimaryKey("postId",post.getId())
+    			.withUpdateExpression("set favorite = :i")
+    			.withValueMap(new ValueMap()
+    					.withInt(":i",favorite));
+        postTable.updateItem(updateItemSpec);
     	//add the relationship to user-favoritePost table
     }
     
@@ -325,8 +373,8 @@ public class DatabaseAPIs {
      * @throws InterruptedException 
      */
     public static String storeImageToS3(File image) throws InterruptedException{
-    	 String existingBucketName = "*** Provide existing bucket name ***";
-         String keyName            = "*** Provide object key ***";  
+    	 String existingBucketName = "cs130";
+         String keyName            = (new Timestamp(new Date().getTime())).toString()+(new Random().nextInt());  
          
          TransferManager tm = new TransferManager(new ProfileCredentialsProvider());        
          // TransferManager processes all transfers asynchronously, 
@@ -355,8 +403,8 @@ public class DatabaseAPIs {
     public static File getImageFromS3(String url) throws FileNotFoundException, IOException{    	
     	//http://www.javaroots.com/2013/05/how-to-upload-and-download-images-in.html
     	AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider());   
-    	String existingBucketName = "*** Provide existing bucket name ***";
-        String keyName            = "*** Provide object key ***";
+    	String existingBucketName = "cs130";
+        String keyName            = url;
     	S3Object object = s3Client.getObject(
     	                  new GetObjectRequest(existingBucketName, keyName));
     	
@@ -366,14 +414,7 @@ public class DatabaseAPIs {
     	IOUtils.copy(objectData, outputStream);
     	outputStream.close();
         return file;    	
-    }
-    
-    
-    
-    
-    
-    
-    
+    }    
     
     /**
      * search posts with given category
@@ -382,11 +423,57 @@ public class DatabaseAPIs {
      * @param category
      * @return List of Post
      */
-    /*
+    
     public static List<Post> searchPostsWithCategory(String category){
     	//search the category-post table and get the list of posts
-    }
-    
+    	String tableName = "PostInCategory";
+    	Table categoryTable = dynamoDB.getTable(tableName);
+    	//firstly query table to get current mypost
+    	QuerySpec spec = new QuerySpec()
+                .withKeyConditionExpression("category = :c")
+                .withValueMap(new ValueMap()
+                		.withString(":c", category));
+        ItemCollection<QueryOutcome> items = categoryTable.query(spec);
+        Iterator<Item> iterator = items.iterator();
+        List<Integer> postIds = new ArrayList<>();
+        while (iterator.hasNext()) {
+        	postIds = iterator.next().getList("postIds"); 
+        }
+        List<Post> posts = new ArrayList<>();
+        Iterator it = postIds.iterator();
+        while(it.hasNext()){        	
+        	BigDecimal b= (BigDecimal) it.next();//Integer.parseInt(s);
+        	String s = b.toString();
+        	int id = Integer.parseInt(s);
+        	//query the Reply table, get corresponding reply, add to list
+        	String postTableName = "Post";
+        	Table postTable = dynamoDB.getTable(postTableName);
+        	Post p = null;
+        	//query Reply table
+        	QuerySpec spec1 = new QuerySpec()
+                    .withKeyConditionExpression("postId = :id")
+                    .withValueMap(new ValueMap()
+                    		.withInt(":id", id));
+            ItemCollection<QueryOutcome> items1 = postTable.query(spec1);
+            Iterator<Item> iterator1 = items1.iterator();
+            while (iterator1.hasNext()) {
+            	Item entry = iterator1.next();
+            	List<String> categories = entry.getList("category");
+            	Post temp = new Post();
+            	temp.setId(entry.getInt("postId"));
+            	List<Reply> replies=getReplyForPost(temp);
+            	p=new Post(
+            			entry.getInt("favorite"),entry.getInt("timeout"),
+            			entry.getString("subject"),entry.getString("detail"),
+            			Timestamp.valueOf(entry.getString("Timestamp")),
+            			entry.getDouble("longitude"),entry.getDouble("latitude"),
+            			(ArrayList<String>)categories,(ArrayList<Reply>)replies,
+            			entry.getInt("ownerId"),entry.getInt("postId"));
+            	posts.add(p);
+            	}  
+            }        
+        return posts;    	 
+        }
     
     /**
      * search posts with given key word
@@ -395,9 +482,36 @@ public class DatabaseAPIs {
      * @param keyword
      * @return List of Post
      */
-    /*
+    
     public static List<Post> searchPostsWithKeyword(String keyword){
-    	
+    	//query post table to find all post with title or content containing keyword
+    	List<Post> posts = new ArrayList<>();
+    	String postTableName = "Post";
+    	Table postTable = dynamoDB.getTable(postTableName);
+    	ItemCollection<ScanOutcome> items = postTable.scan(); //get all posts
+    	Iterator<Item> iterator = items.iterator();
+    	while (iterator.hasNext()) {
+        	Item entry = iterator.next();
+        	String subject = entry.getString("subject");
+        	String detail = entry.getString("detail");
+        	if((!subject.contains(keyword)) && (!detail.contains(keyword)) )//not contain keyword
+        		continue;
+        	//now this post is valid, add to post list        	
+        	//get the list of reply and query reply table to get
+        	List<String> categories = entry.getList("category");
+        	Post temp = new Post();
+        	temp.setId(entry.getInt("postId"));
+        	List<Reply> replies=getReplyForPost(temp);
+        	Post p=new Post(
+        			entry.getInt("favorite"),entry.getInt("timeout"),
+        			entry.getString("subject"),entry.getString("detail"),
+        			Timestamp.valueOf(entry.getString("Timestamp")),
+        			entry.getDouble("longitude"),entry.getDouble("latitude"),
+        			(ArrayList<String>)categories,(ArrayList<Reply>)replies,
+        			entry.getInt("ownerId"),entry.getInt("postId"));
+        	posts.add(p);
+    	}
+    	return posts;
     }
     
     
@@ -431,7 +545,7 @@ public class DatabaseAPIs {
         Timestamp currentTime = new Timestamp(new Date().getTime());
         
         Iterator<Item> iterator = items.iterator();
-        List<Post> posts = new ArrayList();
+        List<Post> posts = new ArrayList<>();
         while (iterator.hasNext()) {
         	Item entry = iterator.next();
         	Timestamp generateTime = Timestamp.valueOf(entry.getString("Timestamp"));

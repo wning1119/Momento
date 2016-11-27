@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ningwang.momento">
-    <uses-permission android:name="android.permission.INTERNET"/>
 
-    <uses-sdk android:minSdkVersion="21" />
+    <uses-sdk android:minSdkVersion="15" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -26,8 +25,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.example.ningwang.momento.LoginActivity"/>
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -42,11 +40,8 @@
         <activity
             android:name=".NewPostActivity"
             android:label="Share a Thought" />
-        <activity
-            android:name=".SignupActivity"
-            android:label="Sign up"  />
-        <activity android:name=".activity_viewposts"></activity>
+        <activity android:name=".activity_viewposts"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
-
 
 </manifest>

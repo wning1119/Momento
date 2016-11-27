@@ -33,4 +33,15 @@
         android:id="@+id/floatingActionButton"
         app:backgroundTint="?attr/colorPrimary" />
 
+    <Button
+        android:text="View Post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/floatingActionButton"
+        android:layout_marginEnd="73dp"
+        android:layout_marginTop="75dp"
+        android:id="@+id/button4"
+        android:onClick="btnClickedViewPost" />
+
 </RelativeLayout>

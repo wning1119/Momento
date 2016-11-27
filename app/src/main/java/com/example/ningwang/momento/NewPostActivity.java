@@ -8,10 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.URI;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class NewPostActivity extends AppCompatActivity {
 
@@ -35,6 +42,46 @@ public class NewPostActivity extends AppCompatActivity {
         buttonShare.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                //Get all the fields and create new Post
+
+                //Subject
+                EditText subjectToShare = (EditText)findViewById(R.id.subjectToShare);
+                String subject = subjectToShare.getText().toString();
+
+                //Detail
+                EditText contentToShare = (EditText)findViewById(R.id.contentToShare);
+                String detail = contentToShare.getText().toString();
+
+                //Default values
+                int favorite = 0;
+                int timeout = 1;
+
+                //timestamp
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                //String timestamp = DateFormat.getDateTimeInstance().format(new Date());
+
+                //Longitude and latitude
+                double longitude = 1;
+                double latitude = 1;
+
+                //Implement category
+                ArrayList<String> category = new ArrayList<String>();
+
+                //replayIds
+                ArrayList<Reply> replies = new ArrayList<Reply>();
+
+                //Ownder ID
+                //Should be inherent
+                int ownerID = 1;
+
+                //Post ID: set to -1. databse will handle it
+                int postID = -1;
+
+                Post newPost = new Post(favorite, timeout, subject, detail, timestamp, longitude, latitude, category, replies, ownerID, postID);
+
+                //API call to write post
+                //writePostToDB(User user, Post post);
+
                 goToMainActivity();
             }
         });

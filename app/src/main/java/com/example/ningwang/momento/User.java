@@ -97,14 +97,11 @@ public class User {
         post.addToReplies(reply);
     }
 
-    public ArrayList<Post> getMy_posts()
-    {
-        return posts;
-    }
+    public ArrayList<Post> getMy_posts() { return posts; }
 
     public ArrayList<Post> getFavorite_posts()
     {
-        return posts;
+        return favorites;
     }
 
 }

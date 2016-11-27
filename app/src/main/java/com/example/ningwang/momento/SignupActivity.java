@@ -2,6 +2,7 @@ package com.example.ningwang.momento;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import android.util.Log;
 
 public class SignupActivity extends AppCompatActivity{
 
@@ -96,8 +100,27 @@ public class SignupActivity extends AppCompatActivity{
         return true;
     }
 
+    public void setUsername(String name) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+
+                        }
+                    }
+                });
+    }
+
     private void register() {
-        String usernamestr = username.getText().toString();
+        final String usernamestr = username.getText().toString();
         String emailstr = email.getText().toString().trim();
         String password1str = password1.getText().toString().trim();
         String password2str = password2.getText().toString().trim();
@@ -114,6 +137,7 @@ public class SignupActivity extends AppCompatActivity{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
+                            setUsername(usernamestr);
                             Toast.makeText(SignupActivity.this, "Signed up successfully!", Toast.LENGTH_SHORT).show();
                             finish();
                             Intent i = new Intent(SignupActivity.this, LoginActivity.class);
@@ -123,6 +147,7 @@ public class SignupActivity extends AppCompatActivity{
                         }
                     }
                 });
+
     }
     public void onSignUpClick(View v) {
         if(v == buttonSignup) {

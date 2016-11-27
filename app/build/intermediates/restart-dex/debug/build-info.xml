@@ -5,32 +5,32 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="616190875049690"
-    token="-1573578665549271210"
+    timestamp="876845116157594"
+    token="-5195744189588717491"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="2689" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="979" />
     <task
         name="verifier"
-        duration="0" />
+        duration="82" />
 
     <artifact
-        location="/Users/ningwang/Documents/androidApp/Momento/app/build/outputs/apk/app-debug.apk"
+        location="/Users/ningwang/Desktop/Momento/app/build/outputs/apk/app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="616190875049690"
+        timestamp="876845116157594"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/Users/ningwang/Documents/androidApp/Momento/app/build/outputs/apk/app-debug.apk"
+            location="/Users/ningwang/Desktop/Momento/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
 

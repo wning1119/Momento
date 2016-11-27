@@ -3,84 +3,93 @@
 
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/jars/libs/internal_impl-24.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.0.0_f9af4e64b9bfcb4a682d1c7e6b786c9dfa16a9a5/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/jars/classes.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="2f7e6e2dad1bccaf68a8820820adc6c0d5b96d37">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.0.0_195159aef839016dacc21e1a129bc65c99ccab1e/classes.dex" />
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.0.0_9047aaac0acd2e8bc935a3b434a26447ca22242d/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-common/9.6.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="efee02e3d38771241ac5e15c645872e0653bb77a">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f2f2bd0e754db36b40877087fa7a5ceeb2bc882b/classes.dex" />
+        sha1="7a343e17f154f513a09c12946fae0f172be079ec">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-common-9.6.0_e23fe49107365c28c0e671041d64a02ea96b2273/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.6.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="f6afcfbf1989631424f9ceaae6ee24777d3cf6ba">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-9.6.0_214ec832745100b143a06e760c8776eefff2c021/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.android.support/design/22.2.1/jars/classes.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.android.support/design/22.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="1821601ddbec5ff125653097812823388700af74">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-22.2.1_cbe49bfe67d51b0ad48194854b3bb2c061cb5191/classes.dex" />
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-22.2.1_bab90ae9672facc1c8428cc1e93eed55ff8f854a/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="392e7b3be80c34d6221fd070ac28cce49d77e7a8">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_df7b217dfd1c465dbdc761011936c34e9e5a6740/classes.dex" />
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-22.2.1_9ca1f92d19f09fe35ffa58211c6448988c47bb26/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.6.0/jars/classes.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/9.6.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d39f676be8400123523882d189a1d84040d34339">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-iid-9.6.0_efa0e517376d2ff1ed2fa557f238bd9b7a42fec8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.6.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="a9f41e6463de88c3f979d796382fc24fb7e9cd41">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-9.6.0_86c564d9f3b5c5308cd7d0e4c694e41311882593/classes.dex" />
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-9.6.0_5094505a45dda93365d2a9c21e5570b0179b3176/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-module/9.6.0/jars/classes.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.6.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="f861fce2e9fa167e7fe8d8558cf2cbb910b9fb34">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-module-9.6.0_8d4f6b5ceba701f0553c1db0ae4cffe37221ed1a/classes.dex" />
+        sha1="93a0248fe0524b4fa2d16f5f7c3cff8452796454">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-9.6.0_decaa91e93c5c53d7b19ac9c48503aead07333f6/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth/9.6.0/jars/classes.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="580fa73d5bf63ffd04b9d66d0e75a2ed21842702">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-9.6.0_6d696bf49f268714357e1082831b13722f8b337b/classes.dex" />
+        sha1="84092a5c685cd6f039e02800fa003ecb5c1470c9">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_ef5995299b7d71b3fa3437b928bc05304d5c1668/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/jars/libs/internal_impl-24.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.0.0_ae6c7d413c4b7278070d3b150ea734e8c6ba5560/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.6.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bd11b3899f275668a9355f19cea2c2320f5f9d14">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-common-9.6.0_cc9e8427ca8d947228efa697fb6135b22be2a9f6/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -89,70 +98,61 @@
         optimize="true"
         revision="25.0.0"
         sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.0.0_04453324cf9ecb7808923943a8d7d6560ed1ce67/classes.dex" />
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.0.0_04453324cf9ecb7808923943a8d7d6560ed1ce67/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.6.0/jars/classes.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth/9.6.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="bd11b3899f275668a9355f19cea2c2320f5f9d14">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-common-9.6.0_9dcb4c813161fc6b348d1b57cdcca453f8c3920c/classes.dex" />
+        sha1="580fa73d5bf63ffd04b9d66d0e75a2ed21842702">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-9.6.0_4a920ef58fa190d60588ce34b609b319eb19e334/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/9.6.0/jars/classes.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-module/9.6.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f861fce2e9fa167e7fe8d8558cf2cbb910b9fb34">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-module-9.6.0_5e1f4411cf394cd118cf6037c6ae29b7f90eff9d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/9.6.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="74d1712880eb2b4ab37ddf3c6a3232c883756726">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-impl-9.6.0_b3bebc850da30a7c3e8c7ec1c28304f326708534/classes.dex" />
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-impl-9.6.0_f96cc08a4737f5188d4581fa8ba854306e914803/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.6.0/jars/classes.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.6.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="93a0248fe0524b4fa2d16f5f7c3cff8452796454">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-9.6.0_9fdf305b89c0ce6d572d6889f1eecd3a00e170fb/classes.dex" />
+        sha1="f6afcfbf1989631424f9ceaae6ee24777d3cf6ba">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-9.6.0_20a633cb88e141dd2c4557ba807383701842f732/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/9.6.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d39f676be8400123523882d189a1d84040d34339">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-iid-9.6.0_f9eb08b4f4dff7c0148c227f59062beef9a78446/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-common/9.6.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="7a343e17f154f513a09c12946fae0f172be079ec">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-common-9.6.0_d7d265af1b50ac2ecef01ac97136944e55d1de82/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-22.2.1_ed1abbe5b68e9c49ae335e11990feedac7095c6b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.6.0/jars/classes.jar"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.6.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="614b2ffd04818e865e1c02cc149c6b92e518e862">
-        <dex dex="/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.6.0_383753f232d22e4356bed59f1ad1dc3aac15ad45/classes.dex" />
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.6.0_a508af49d85957dd82effb2be9e91e5763fa2472/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="44c382acd358352154bd4ed949b28028a1d46458">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_39e2bb9ed38efbe9df0a65004517bbe810a8796e/classes.dex" />
     </item>
 
 </items>

@@ -1,7 +1,7 @@
-#Fri Nov 18 14:23:37 PST 2016
-base.0=/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_df7b217dfd1c465dbdc761011936c34e9e5a6740
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f2f2bd0e754db36b40877087fa7a5ceeb2bc882b/classes.dex
-base.1=/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f2f2bd0e754db36b40877087fa7a5ceeb2bc882b
-file.0=/Users/ningwang/Documents/androidApp/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_df7b217dfd1c465dbdc761011936c34e9e5a6740/classes.dex
+#Sat Nov 26 17:28:36 PST 2016
+base.0=/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_39e2bb9ed38efbe9df0a65004517bbe810a8796e
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_ef5995299b7d71b3fa3437b928bc05304d5c1668/classes.dex
+base.1=/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_ef5995299b7d71b3fa3437b928bc05304d5c1668
+file.0=/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_39e2bb9ed38efbe9df0a65004517bbe810a8796e/classes.dex

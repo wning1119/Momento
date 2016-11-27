@@ -42,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (firebaseAuth.getCurrentUser() !=  null) {
             //go to homepage
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
         }
     }
 

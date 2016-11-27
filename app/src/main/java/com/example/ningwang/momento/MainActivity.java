@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.design.widget.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 goToMyPostsActivity();
                 return true;
             case R.id.action_logout:
+                FirebaseAuth.getInstance().signOut();
                 goToLogin();
                 return true;
             default:

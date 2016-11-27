@@ -42,8 +42,10 @@
         <activity
             android:name=".NewPostActivity"
             android:label="Share a Thought" />
+        <activity
+            android:name=".SignupActivity"
+            android:label="Sign up"  />
         <activity android:name=".activity_viewposts"></activity>
-        <activity android:name=".SignupActivity"></activity>
     </application>
 
 

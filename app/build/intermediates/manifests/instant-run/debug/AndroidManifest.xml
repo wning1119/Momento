@@ -59,8 +59,10 @@
         <activity
             android:name="com.example.ningwang.momento.NewPostActivity"
             android:label="Share a Thought" />
+        <activity
+            android:name="com.example.ningwang.momento.SignupActivity"
+            android:label="Sign up" />
         <activity android:name="com.example.ningwang.momento.activity_viewposts" />
-        <activity android:name="com.example.ningwang.momento.SignupActivity" />
 
         <receiver
             android:name="com.google.android.gms.measurement.AppMeasurementReceiver"

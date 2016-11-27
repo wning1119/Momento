@@ -21,6 +21,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import android.util.Log;
+import com.example.ningwang.momento.User;
 
 public class SignupActivity extends AppCompatActivity{
 
@@ -100,24 +101,7 @@ public class SignupActivity extends AppCompatActivity{
         return true;
     }
 
-    public void setUsername(String name) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(name)
-                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                .build();
-
-        user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-
-                        }
-                    }
-                });
-    }
 
     private void register() {
         final String usernamestr = username.getText().toString();
@@ -137,7 +121,7 @@ public class SignupActivity extends AppCompatActivity{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            setUsername(usernamestr);
+                            User user = new User(usernamestr);
                             Toast.makeText(SignupActivity.this, "Signed up successfully!", Toast.LENGTH_SHORT).show();
                             finish();
                             Intent i = new Intent(SignupActivity.this, LoginActivity.class);

@@ -72,7 +72,8 @@ public class NewPostActivity extends AppCompatActivity {
 
                 //Ownder ID
                 //Should be inherent
-                int ownerID = 1;
+                User user = new User();
+                String ownerID = user.getId();
 
                 //Post ID: set to -1. databse will handle it
                 int postID = -1;

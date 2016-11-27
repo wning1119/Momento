@@ -5,33 +5,68 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="890585036565306"
+    timestamp="906538452905361"
     token="-5195744189588717491"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="519" />
+        duration="357" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="24" />
     <task
         name="instant-run-transform"
-        duration="449" />
+        duration="41" />
     <task
         name="verifier"
-        duration="54" />
+        duration="2" />
 
     <artifact
-        location="/Users/ningwang/Desktop/Momento/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        location="/Users/ningwang/Desktop/Momento/app/build/intermediates/reload-dex/debug/classes.dex"
+        type="RELOAD_DEX" />
 
     <build
-        timestamp="890585036565306"
+        timestamp="905950525183417"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/Users/ningwang/Desktop/Momento/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="906084581788551"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/ningwang/Desktop/Momento/app/build/intermediates/builds/debug/906084581788551/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="906113185666514"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/ningwang/Desktop/Momento/app/build/intermediates/builds/debug/906113185666514/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="906359919585555"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/ningwang/Desktop/Momento/app/build/intermediates/builds/debug/906359919585555/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="906506731928962"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/ningwang/Desktop/Momento/app/build/intermediates/builds/debug/906506731928962/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="906538452905361"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/ningwang/Desktop/Momento/app/build/intermediates/reload-dex/debug/classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>

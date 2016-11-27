@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/lib/com.example.sungyup.cs130"
+    xmlns:app="http://schemas.android.com/apk/lib/com.example.ningwang.momento"
     xmlns:app2="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_viewposts"
@@ -23,14 +23,6 @@
         android:paddingTop="10dp"
         android:textColor="#000000"
         android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/abc_btn_borderless_material"
-        android:layout_alignBottom="@+id/editText6"
-        android:id="@+id/imageView"
-        android:layout_marginStart="20dp" />
 
     <!--
     Create a button. Make its background a heart outline
@@ -92,27 +84,26 @@
         android:text="Username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/textView3"
         android:layout_above="@+id/imageButton"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="19dp"
-        android:id="@+id/textView3" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="MM/DD/YYYY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView3"
+        android:id="@+id/textView4"
+        android:layout_alignBottom="@+id/textView3"
         android:layout_toEndOf="@+id/textView3"
-        android:layout_marginStart="48dp"
-        android:id="@+id/textView4" />
+        android:layout_marginStart="37dp"
+        android:layout_alignTop="@+id/textView3" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:inputType="textCapSentences|textMultiLine"
         android:ems="10"
-        android:layout_marginTop="14dp"
-        android:id="@+id/editText6"
+        android:id="@+id/postContent"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
         android:paddingStart="10dp"
@@ -122,6 +113,17 @@
         android:textColor="#000000"
         android:text="Some Posts and sharings and stuff"
         android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="48dp"
+        android:layout_above="@+id/textView4" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/abc_btn_borderless_material"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

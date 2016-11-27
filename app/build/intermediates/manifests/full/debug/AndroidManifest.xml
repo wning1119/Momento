@@ -8,8 +8,6 @@
         android:minSdkVersion="21"
         android:targetSdkVersion="22" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -19,6 +17,8 @@
     <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!-- Required permission for App measurement to run. -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -41,7 +41,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.example.ningwang.momento.LoginActivity" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -61,7 +60,9 @@
         <activity
             android:name="com.example.ningwang.momento.SignupActivity"
             android:label="Sign up" />
-        <activity android:name="com.example.ningwang.momento.activity_viewposts" />
+        <activity
+            android:name="com.example.ningwang.momento.activity_viewposts"
+            android:windowSoftInputMode="stateHidden" />
 
         <receiver
             android:name="com.google.android.gms.measurement.AppMeasurementReceiver"

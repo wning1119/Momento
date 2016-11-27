@@ -4,7 +4,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import com.amazonaws.AmazonClientException;
@@ -18,8 +21,10 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.ItemCollection;
 import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
+import com.amazonaws.services.dynamodbv2.document.ScanOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
+import com.amazonaws.services.dynamodbv2.document.spec.ScanSpec;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.s3.AmazonS3;
@@ -72,7 +77,7 @@ public class DatabaseAPIs {
         	p.setSubject("Welcome to CS130");
         	p.setDetail("hello");
         	p.setTimestamp();
-        	p.setLocation("11.10", "11.23");
+        	p.setLocation(11.10, 11.23);
         	p.setOwner(12);
         	ArrayList<String> c = new ArrayList();
         	c.add("study");
@@ -88,6 +93,26 @@ public class DatabaseAPIs {
             
             addReplyToPost(p,r);
             
+            
+            //test getReplyForPost API
+            List<Reply> l = getReplyForPost(p);
+            System.out.print("result for get reply"+"\n");
+            for(Reply re:l){
+            	System.out.println(re.getId()+"\n");
+            	System.out.println(re.getOwner()+"\n");
+            	System.out.println(re.getTimestamp()+"\n");
+            	System.out.println(re.getContent()+"\n");
+            }
+            
+            //test search with gps function
+            System.out.println("Result for search function:"+"\n");
+            List<Post> list = searchPostsWithLocation(10.00,15.00,5.00,20.00);
+            for(Post po:list){
+            	System.out.println(po.getId()+"\n");
+            	System.out.println(po.getOwner()+"\n");
+            	System.out.println(po.getTimestamp()+"\n");
+            	System.out.println(po.getDetail()+"\n");
+            }
             
             System.out.println("Success!");
             
@@ -120,8 +145,8 @@ public class DatabaseAPIs {
     			.withInt("favorite", post.getFavorite())
     			.withInt("timeout", post.getTimeout())
     			.withString("Timestamp",post.getTimestamp().toString())
-    			.withString("longitude", post.getLongitude())
-    			.withString("latitude", post.getLatitude())
+    			.withDouble("longitude", post.getLongitude())
+    			.withDouble("latitude", post.getLatitude())
     			.withList("category", post.getCategory())
     			.withList("replyIds", new ArrayList())
     			.withInt("ownerId", post.getOwner())
@@ -197,7 +222,7 @@ public class DatabaseAPIs {
     	Table replyTable = dynamoDB.getTable(replyTableName);
     	replyTable.putItem(new Item()
     			.withPrimaryKey("replyId",replyCount)
-    			.withInt("onwerId", reply.getOwner())
+    			.withInt("ownerId", reply.getOwner())
     			.withString("content", reply.getContent())
     			.withString("timestamp", reply.getTimestamp().toString())
     			);
@@ -244,16 +269,20 @@ public class DatabaseAPIs {
                 		.withInt(":id", post.getId()));
         ItemCollection<QueryOutcome> items = postTable.query(spec);
         Iterator<Item> iterator = items.iterator();
-        List<Integer> replyIds = null;
+        List<Integer> replyIds = new ArrayList();
         while (iterator.hasNext()) {
         	replyIds = iterator.next().getList("replyIds"); 
         }
-        List<Reply> replies = null;
-        for(int id:replyIds){
+        List<Reply> replies = new ArrayList();
+        Iterator it = replyIds.iterator();
+        while(it.hasNext()){        	
+        	BigDecimal b= (BigDecimal) it.next();//Integer.parseInt(s);
+        	String s = b.toString();
+        	int id = Integer.parseInt(s);
         	//query the Reply table, get corresponding reply, add to list
         	String replyTableName = "Reply";
         	Table replyTable = dynamoDB.getTable(replyTableName);
-        	Reply r = new Reply();
+        	Reply r = null;
         	//query Reply table
         	QuerySpec spec1 = new QuerySpec()
                     .withKeyConditionExpression("replyId = :id")
@@ -262,8 +291,11 @@ public class DatabaseAPIs {
             ItemCollection<QueryOutcome> items1 = replyTable.query(spec1);
             Iterator<Item> iterator1 = items1.iterator();
             while (iterator1.hasNext()) {
+            	Item entry = iterator1.next();
+            	r = new Reply(entry.getInt("ownerId"),entry.getString("content"));
             	r.setId(id);
-            	r.setOwner(iterator.next().getInt("ownerId")); 
+            	Timestamp t=java.sql.Timestamp.valueOf(entry.getString("timestamp"));
+            	r.setTimestamp(t);
             }
         	replies.add(r);
         }
@@ -379,10 +411,49 @@ public class DatabaseAPIs {
      * @param highlongitude
      * @return List of Post
      */
-    /*
-    public static List<Post> searchPostsWithLocation(String lowlatitude,
-    		String highlatitude, String lowlongitude, String highlongitude){
+    
+    public static List<Post> searchPostsWithLocation(Double lowlatitude,
+    		Double highlatitude, Double lowlongitude, Double highlongitude){
     	//when searching, check the remaining time and only return valid posts
-    }
-    */
+    	String postTableName = "Post";
+    	Table postTable = dynamoDB.getTable(postTableName);
+        
+        ScanSpec scanSpec = new ScanSpec()
+    		    .withFilterExpression("latitude > :lowla and latitude< :highla and longitude > :lowlo and longitude < :highlo")
+    		    .withValueMap(new ValueMap()
+    		    		.with(":lowla", lowlatitude)
+    		    		.with(":highla", highlatitude)
+    		    		.with(":lowlo", lowlongitude)
+    		    		.with(":highlo", highlongitude));
+        
+        ItemCollection<ScanOutcome> items = postTable.scan(scanSpec);
+
+        Timestamp currentTime = new Timestamp(new Date().getTime());
+        
+        Iterator<Item> iterator = items.iterator();
+        List<Post> posts = new ArrayList();
+        while (iterator.hasNext()) {
+        	Item entry = iterator.next();
+        	Timestamp generateTime = Timestamp.valueOf(entry.getString("Timestamp"));
+        	int favorite = entry.getInt("favorite");  //each favorite is 1 minutes
+        	int totalLifeTimeinSeconds = favorite*60 +1*60*60; //original life time is 1 hour
+        	Timestamp newTime = new Timestamp(generateTime.getTime() + totalLifeTimeinSeconds * 1000);
+        	if(currentTime.compareTo(newTime)==1) //current time larger than newTime, not valid
+        		continue;
+        	//now this post is valid, add to post list        	
+        	//get the list of reply and query reply table to get
+        	List<String> categories = entry.getList("category");
+        	Post temp = new Post();
+        	temp.setId(entry.getInt("postId"));
+        	List<Reply> replies=getReplyForPost(temp);
+        	Post p=new Post(
+        			entry.getInt("favorite"),entry.getInt("timeout"),
+        			entry.getString("subject"),entry.getString("detail"),
+        			generateTime,entry.getDouble("longitude"),entry.getDouble("latitude"),
+        			(ArrayList<String>)categories,(ArrayList<Reply>)replies,
+        			entry.getInt("ownerId"),entry.getInt("postId"));
+        	posts.add(p);
+        }        
+        return posts;
+    }  
 }

@@ -30,6 +30,11 @@ public class Reply{
         timestamp = new Timestamp(date.getTime());
     }
 
+    public void setTimestamp(Timestamp timestamp)
+    {
+        this.timestamp = timestamp;
+    }
+
     public void setOwner(int ownerId) { this.ownerId = ownerId; }
 
     public int getOwner() { return ownerId; }

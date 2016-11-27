@@ -5,19 +5,19 @@ import org.junit.Test;
 /**
  * Created by Songyan Xie on 2016/11/25.
  */
+
 public class PostTest extends TestCase {
     private static Post post;
 
-    public PostTest(String name)
-    {
+    public PostTest(String name) {
         super(name);
     }
 
     @BeforeClass
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         post = new Post();
     }
+
 
     @Test
     public void testFavorite()
@@ -50,9 +50,9 @@ public class PostTest extends TestCase {
     @Test
     public void testLocation()
     {
-        post.setLocation("11", "12");
-        assertEquals("11", post.getLongitude());
-        assertEquals("12", post.getLatitude());
+        post.setLocation(11.01, 12.02);
+        assertEquals(11.01, post.getLongitude());
+        assertEquals(12.02, post.getLatitude());
     }
 
     @Test

@@ -74,13 +74,13 @@ public class DatabaseAPIs {
         try {        	
             //TSET ONLY!!!
         	User u = new User();
-        	u.setUserInfo(12, "Ye");
+        	u.setUserInfo("12", "Ye");
         	Post p = new Post();
         	p.setSubject("Welcome to CS130");
         	p.setDetail("hello");
         	p.setTimestamp();
         	p.setLocation(11.10, 11.23);
-        	p.setOwner(12);
+        	p.setOwner("12");
         	ArrayList<String> c = new ArrayList<>();
         	c.add("study");
         	c.add("nerd");
@@ -90,7 +90,7 @@ public class DatabaseAPIs {
         	
             //test reply api
         	p.setId(1);//need to set id here because post is not returned by db
-            Reply r = new Reply(9,"that's awesome!");
+            Reply r = new Reply("9","that's awesome!");
             r.setTimestamp();
             
             addReplyToPost(p,r);
@@ -177,7 +177,7 @@ public class DatabaseAPIs {
     			.withDouble("latitude", post.getLatitude())
     			.withList("category", post.getCategory())
     			.withList("replyIds", new ArrayList<>())
-    			.withInt("ownerId", post.getOwner())
+    			.withString("ownerId", post.getOwner())
     			);
         
     	/* 
@@ -250,7 +250,7 @@ public class DatabaseAPIs {
     	Table replyTable = dynamoDB.getTable(replyTableName);
     	replyTable.putItem(new Item()
     			.withPrimaryKey("replyId",replyCount)
-    			.withInt("ownerId", reply.getOwner())
+    			.withString("ownerId", reply.getOwner())
     			.withString("content", reply.getContent())
     			.withString("timestamp", reply.getTimestamp().toString())
     			);
@@ -320,7 +320,7 @@ public class DatabaseAPIs {
             Iterator<Item> iterator1 = items1.iterator();
             while (iterator1.hasNext()) {
             	Item entry = iterator1.next();
-            	r = new Reply(entry.getInt("ownerId"),entry.getString("content"));
+            	r = new Reply(entry.getString("ownerId"),entry.getString("content"));
             	r.setId(id);
             	Timestamp t=java.sql.Timestamp.valueOf(entry.getString("timestamp"));
             	r.setTimestamp(t);
@@ -468,7 +468,7 @@ public class DatabaseAPIs {
             			Timestamp.valueOf(entry.getString("Timestamp")),
             			entry.getDouble("longitude"),entry.getDouble("latitude"),
             			(ArrayList<String>)categories,(ArrayList<Reply>)replies,
-            			entry.getInt("ownerId"),entry.getInt("postId"));
+            			entry.getString("ownerId"),entry.getInt("postId"));
             	posts.add(p);
             	}  
             }        
@@ -508,7 +508,7 @@ public class DatabaseAPIs {
         			Timestamp.valueOf(entry.getString("Timestamp")),
         			entry.getDouble("longitude"),entry.getDouble("latitude"),
         			(ArrayList<String>)categories,(ArrayList<Reply>)replies,
-        			entry.getInt("ownerId"),entry.getInt("postId"));
+        			entry.getString("ownerId"),entry.getInt("postId"));
         	posts.add(p);
     	}
     	return posts;
@@ -565,7 +565,7 @@ public class DatabaseAPIs {
         			entry.getString("subject"),entry.getString("detail"),
         			generateTime,entry.getDouble("longitude"),entry.getDouble("latitude"),
         			(ArrayList<String>)categories,(ArrayList<Reply>)replies,
-        			entry.getInt("ownerId"),entry.getInt("postId"));
+        			entry.getString("ownerId"),entry.getInt("postId"));
         	posts.add(p);
         }        
         return posts;

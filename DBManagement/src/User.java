@@ -7,13 +7,13 @@ import java.util.ArrayList;
 public class User{
     public User()
     {
-        user_id = 0;
+        user_id = null;
         user_name = null;
         favorite_posts = new ArrayList<>();
         my_posts = new ArrayList<>();
     }
 
-    public int getUser_id()
+    public String getUser_id()
     {
         return user_id;
     }
@@ -23,7 +23,7 @@ public class User{
         return user_name;
     }
 
-    public void setUserInfo(int user_id, String user_name)
+    public void setUserInfo(String user_id, String user_name)
     {
         this.user_id = user_id;
         this.user_name = user_name;
@@ -67,7 +67,7 @@ public class User{
         return favorite_posts;
     }
 
-    private int user_id;
+    private String user_id;
     private String user_name;
     private ArrayList<Post> favorite_posts;
     private ArrayList<Post> my_posts;

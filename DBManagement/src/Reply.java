@@ -6,9 +6,9 @@ import java.util.Date;
  */
 // Reply Class
 public class Reply{
-    public Reply(int ownerId, String content)
+    public Reply(String user_id, String content)
     {
-        this.ownerId = ownerId;
+        this.ownerId = user_id;
         this.content = content;
         Date date = new Date();
         timestamp = new Timestamp(date.getTime());
@@ -17,7 +17,7 @@ public class Reply{
 
     public Reply()
     {
-        this.ownerId = -1;
+        this.ownerId = null;
         this.content = null;
         Date date = new Date();
         timestamp = new Timestamp(date.getTime());
@@ -35,9 +35,9 @@ public class Reply{
         this.timestamp = timestamp;
     }
 
-    public void setOwner(int ownerId) { this.ownerId = ownerId; }
+    public void setOwner(String ownerId) { this.ownerId = ownerId; }
 
-    public int getOwner() { return ownerId; }
+    public String getOwner() { return ownerId; }
 
     public String getContent() { return content; }
 
@@ -47,7 +47,7 @@ public class Reply{
 
     public int getId() { return id; }
 
-    private int ownerId;
+    private String ownerId;
     private String content;
     private Timestamp timestamp;
     private int id;

@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,14 +19,14 @@ public class Post {
         latitude = -1;
         category = new ArrayList<>();
         replies = new ArrayList<>();
-        ownerId = -1;
+        ownerId = null;
         id = -1;
     }
 
     public Post(int favorite, int timeout, String subject, String detail,
                 Timestamp timestamp, double longitude, double latitude,
                 ArrayList<String> category, ArrayList<Reply> replies,
-                int ownerId, int id)
+                String ownerId, int id)
     {
         this.favorite = favorite;
         this.timeout = timeout;
@@ -42,12 +41,12 @@ public class Post {
         this.id = id;
     }
 
-    public void setOwner(int ownerId)
+    public void setOwner(String user_id)
     {
-        this.ownerId = ownerId;
+        this.ownerId = user_id;
     }
 
-    public int getOwner() { return ownerId; }
+    public String getOwner() { return ownerId; }
 
     // get # of favorites
     public int getFavorite() { return favorite; }
@@ -162,7 +161,7 @@ public class Post {
     private double latitude;
     private ArrayList<String> category;
     private ArrayList<Reply> replies;
-    private int ownerId;
+    private String ownerId;
     private int id;
 
 }

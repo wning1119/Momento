@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.sungyup.cs130.NewPostActivity">
+    tools:context="com.example.ningwang.momento.NewPostActivity">
 
     <EditText
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         android:inputType="text"
         android:ems="10"
         android:layout_marginTop="24dp"
-        android:id="@+id/editText3"
+        android:id="@+id/subjectToShare"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
@@ -34,7 +34,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:background="@drawable/rounded_corner"
-        android:layout_alignTop="@+id/editText6"
+        android:layout_alignTop="@+id/contentToShare"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
@@ -43,9 +43,9 @@
         android:layout_height="wrap_content"
         android:inputType="textCapSentences|textMultiLine"
         android:ems="10"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/subjectToShare"
         android:layout_marginTop="25dp"
-        android:id="@+id/editText6"
+        android:id="@+id/contentToShare"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:hint="Share..."

@@ -16,8 +16,8 @@ public class Post {
         subject = null;
         detail = null;
         timestamp = null;
-        longitude = null;
-        latitude = null;
+        longitude = -1;
+        latitude = -1;
         category = new ArrayList<>();
         replies = new ArrayList<>();
         ownerId = -1;
@@ -25,7 +25,7 @@ public class Post {
     }
 
     public Post(int favorite, int timeout, String subject, String detail,
-                Timestamp timestamp, String longitude, String latitude,
+                Timestamp timestamp, double longitude, double latitude,
                 ArrayList<String> category, ArrayList<Reply> replies,
                 int ownerId, int id)
     {
@@ -110,17 +110,17 @@ public class Post {
     public Timestamp getTimestamp() { return timestamp; }
 
     // set location
-    public void setLocation(String longitude, String latitude)
+    public void setLocation(double longitude, double latitude)
     {
         this.longitude = longitude;
         this.latitude = latitude;
     }
 
     // get longitude
-    public String getLongitude() { return longitude; }
+    public double getLongitude() { return longitude; }
 
     // get latitude
-    public String getLatitude() { return latitude; }
+    public double getLatitude() { return latitude; }
 
     // add contents to category
     public void addToCategory(String content)
@@ -158,8 +158,8 @@ public class Post {
     private String subject;
     private String detail;
     private Timestamp timestamp;
-    private String longitude;
-    private String latitude;
+    private double longitude;
+    private double latitude;
     private ArrayList<String> category;
     private ArrayList<Reply> replies;
     private int ownerId;

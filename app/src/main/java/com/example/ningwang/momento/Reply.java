@@ -2,39 +2,57 @@ package com.example.ningwang.momento;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
-
 
 /**
  * Created by Songyan Xie on 2016/11/13.
  */
 // Reply Class
-
-@DynamoDBTable(tableName = "Replies")
 public class Reply{
-    private String ownerId;
-    private String content;
-    private Timestamp timestamp;
-    private int id;
+    public Reply(int ownerId, String content)
+    {
+        this.ownerId = ownerId;
+        this.content = content;
+        Date date = new Date();
+        timestamp = new Timestamp(date.getTime());
+        id = -1;
+    }
 
-    @DynamoDBHashKey(attributeName = "replyId")
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public Reply()
+    {
+        this.ownerId = -1;
+        this.content = null;
+        Date date = new Date();
+        timestamp = new Timestamp(date.getTime());
+        id = -1;
+    }
 
-    @DynamoDBAttribute(attributeName = "content")
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
-
-    @DynamoDBAttribute(attributeName = "ownerId")
-    public String getOwner() { return ownerId; }
-    public void setOwner(String ownerId) { this.ownerId = ownerId; }
-
-    @DynamoDBAttribute(attributeName = "Timestamp")
-    public Timestamp getTimestamp() { return timestamp; }
     public void setTimestamp()
     {
         Date date = new Date();
-        tp = new Timestamp(date.getTime());
-        this.timestamp = tp;
+        timestamp = new Timestamp(date.getTime());
     }
+
+    public void setTimestamp(Timestamp timestamp)
+    {
+        this.timestamp = timestamp;
+    }
+
+    public void setOwner(int ownerId) { this.ownerId = ownerId; }
+
+    public int getOwner() { return ownerId; }
+
+    public String getContent() { return content; }
+
+    public void setContent(String content) { this.content = content; }
+
+    public Timestamp getTimestamp() { return timestamp; }
+
+    public void setId(int id) { this.id = id; }
+
+    public int getId() { return id; }
+
+    private int ownerId;
+    private String content;
+    private Timestamp timestamp;
+    private int id;
 }

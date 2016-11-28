@@ -1,27 +1,26 @@
 package com.example.ningwang.momento;
 
+import java.sql.Timestamp;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.*;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
-import com.amazonaws.services.dynamodbv2.model.*;
-
-import java.sql.Timestamp;
+import com.amazonaws.services.dynamodbv2.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import android.content.Context;
 
 public class Database {
     private AmazonDynamoDBClient ddbClient;
-    private DynamoMapper mapper;
+    private DynamoDBMapper mapper;
 
     int postCount;
     int replyCount;
 
-    public Database() {
+    public Database(Context context) {
         // Initialize the Amazon Cognito credentials provider
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                getApplicationContext(),
+                context,
                 "us-west-2:e95e6c82-d2d5-4e4f-be55-cced122f7451", // Identity Pool ID
                 Regions.US_WEST_2 // Region
         );
@@ -45,9 +44,9 @@ public class Database {
 
         // set default values
         post.setFavorite(0);
-        post.setReplyIds(new ArrayList<>());
+        post.setReplyIds(new ArrayList<Integer>());
         post.setReplies();
-        post.setPostId(postCount);
+        post.setId(postCount);
         post.setTimestamp();
 
         mapper.save(post);
@@ -84,7 +83,7 @@ public class Database {
      * @param post
      */
     public List<Reply> getRepliesForPost(Post post){
-        List<int> replyIds = post.getReplyIds();
+        List<Integer> replyIds = post.getReplyIds();
         List<Reply> replies = new ArrayList<>();
         for (int id : replyIds) {
             replies.add(mapper.load(Reply.class, id));
@@ -111,7 +110,7 @@ public class Database {
     public boolean notTimedOut(int timeoutVal, Timestamp created, Timestamp currentTime)
     {
         Timestamp newTime = new Timestamp(created.getTime() + timeoutVal * 1000);
-        return (current.compareTo(newTime) == 1));
+        return (currentTime.compareTo(newTime) == 1);
     }
 
     /**
@@ -123,12 +122,12 @@ public class Database {
      */
 
     public List<Post> searchPostsWithCategory(String category) {
-        List<Post> searchResults = newArrayList<>();
+        List<Post> searchResults = new ArrayList<>();
 
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression);
 
-        Timestamp currentTime = new Timestamp(new Data().getTime());
+        Timestamp currentTime = new Timestamp(new Date().getTime());
         for (Post p : result)
         {
             int timeoutVal = calculateTimeoutSeconds(p.getFavorite(), p.getTimeout());
@@ -159,12 +158,12 @@ public class Database {
      */
 
     public List<Post> searchPostsWithKeyword(String keyword) {
-        List<Post> searchResults = newArrayList<>();
+        List<Post> searchResults = new ArrayList<>();
 
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression);
 
-        Timestamp currentTime = new Timestamp(new Data().getTime());
+        Timestamp currentTime = new Timestamp(new Date().getTime());
 
         for (Post p : result)
         {
@@ -194,12 +193,12 @@ public class Database {
      */
 
     public List<Post> searchPostsWithLocation (Double lowlatitude, Double highlatitude, Double lowlongitude, Double highlongitude){
-        List<Post> searchResults = newArrayList<>();
+        List<Post> searchResults = new ArrayList<>();
 
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression);
 
-        Timestamp currentTime = new Timestamp(new Data().getTime());
+        Timestamp currentTime = new Timestamp(new Date().getTime());
 
         for (Post p : result)
         {
@@ -211,7 +210,7 @@ public class Database {
             Double plat = p.getLatitude();
             Double plong = p.getLongitude();
             if (plat >= lowlatitude && plat <= highlatitude &&
-                plong >= lowlatitude && plong <= highlongitude)
+                    plong >= lowlatitude && plong <= highlongitude)
                 searchResults.add(p);
         }
 

@@ -4,7 +4,13 @@ import java.lang.reflect.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.Serializable;
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.*;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
+import com.amazonaws.services.dynamodbv2.model.*;
+
 
 /**
  * Created by Songyan Xie on 2016/11/13.
@@ -12,7 +18,8 @@ import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 
 // Post Class
 @DynamoDBTable(tableName = "Posts")
-public class Post {
+@SuppressWarnings("serial")
+public class Post implements Serializable{
     // private fields
     private int favorite;
     private int timeout;
@@ -22,7 +29,7 @@ public class Post {
     private double longitude;
     private double latitude;
     private ArrayList<String> category;
-    private ArrayList<int> replyIds;
+    private ArrayList<Integer> replyIds;
     private ArrayList<Reply> replies;
     private String ownerId;
     private int id;
@@ -40,7 +47,7 @@ public class Post {
     public void setTimestamp()
     {
         Date date = new Date();
-        tp = new Timestamp(date.getTime());
+        Timestamp tp = new Timestamp(date.getTime());
         this.timestamp = tp;
     }
 
@@ -100,13 +107,14 @@ public class Post {
     public void setOwner(String ownerId) { this.ownerId = ownerId; }
 
     @DynamoDBAttribute(attributeName = "replyIds")
-    public ArrayList<int> getReplyIds() { return replyIds; }
-    public void setReplyIds() { this.replyIds = new ArrayList<>(); }
+    public ArrayList<Integer> getReplyIds() { return replyIds; }
+    public void setReplyIds(ArrayList<Integer> ids) { this.replyIds = ids; }
     public int addReplyId(int id)
     {
-        ArrayList<int> currIds = getReplyIds();
+        ArrayList<Integer> currIds = getReplyIds();
         currIds.add(id);
         setReplyIds(currIds);
+        return 1;
     }
 
     // get replies

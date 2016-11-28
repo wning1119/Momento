@@ -25,7 +25,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -41,10 +41,9 @@
             android:name=".NewPostActivity"
             android:label="Share a Thought" />
         <activity
-            android:name=".SignupActivity"
-            android:label="Sign up" />
-        <activity android:name=".activity_viewposts"
-            android:windowSoftInputMode="stateHidden"/>
+            android:name=".activity_viewposts"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".choose_categories"></activity>
     </application>
 
 </manifest>

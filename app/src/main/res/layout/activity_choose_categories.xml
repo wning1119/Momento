@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_choose_categories"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.ningwang.momento.choose_categories">
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:id="@+id/cancel2"
+        android:layout_alignBaseline="@+id/share"
+        android:layout_alignBottom="@+id/share"
+        android:layout_alignParentStart="true"
+        android:onClick="cancelCreation" />
+
+    <Button
+        android:text="Share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="32dp"
+        android:id="@+id/share"
+        android:background="@drawable/rounded_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="sharePost" />
+
+    <TextView
+        android:text="Select Categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <RadioButton
+        android:text="Food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioButton"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="18dp" />
+
+    <RadioButton
+        android:text="Travel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:id="@+id/radioButton5"
+        android:layout_below="@+id/radioButton"
+        android:layout_alignStart="@+id/radioButton" />
+
+    <RadioButton
+        android:text="Entertainment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioButton5"
+        android:layout_alignStart="@+id/radioButton5"
+        android:layout_marginTop="17dp"
+        android:id="@+id/radioButton6" />
+
+    <RadioButton
+        android:text="Other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioButton6"
+        android:layout_alignStart="@+id/radioButton6"
+        android:layout_marginTop="17dp"
+        android:id="@+id/radioButton7" />
+
+    <TextView
+        android:text="Set Timeout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioButton7"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"
+        android:id="@+id/textView5"
+        android:textSize="20sp"
+        android:textColor="#000000" />
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberPicker"
+        android:layout_marginTop="0dp"
+        android:layout_below="@+id/textView5"
+        android:layout_toStartOf="@+id/share"
+        android:layout_marginBottom="100dp" />
+
+    <TextView
+        android:text="Hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/numberPicker"
+        android:layout_alignEnd="@+id/share"
+        android:id="@+id/textView6"
+        android:layout_marginTop="50dp"
+        android:textSize="25sp"
+        android:textColor="#000000" />
+
+</RelativeLayout>

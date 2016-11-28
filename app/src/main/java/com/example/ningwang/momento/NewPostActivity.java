@@ -72,8 +72,7 @@ public class NewPostActivity extends AppCompatActivity {
 
                 //Ownder ID
                 //Should be inherent
-                User user = new User();
-                String ownerID = user.getId();
+                int ownerID = 1;
 
                 //Post ID: set to -1. databse will handle it
                 int postID = -1;
@@ -83,7 +82,8 @@ public class NewPostActivity extends AppCompatActivity {
                 //API call to write post
                 //writePostToDB(User user, Post post);
 
-                goToMainActivity();
+                goToChooseCats(newPost);
+
             }
         });
 
@@ -91,6 +91,12 @@ public class NewPostActivity extends AppCompatActivity {
     }
     private void goToMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToChooseCats(Post post){
+        Intent intent = new Intent(this, choose_categories.class);
+        intent.putExtra("post", post);
         startActivity(intent);
     }
 

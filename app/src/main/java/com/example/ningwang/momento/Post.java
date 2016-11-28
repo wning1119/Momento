@@ -101,7 +101,7 @@ public class Post {
 
     @DynamoDBAttribute(attributeName = "replyIds")
     public ArrayList<int> getReplyIds() { return replyIds; }
-    public void setReplyIds(ArrayList<int> replies) { this.replyIds = replies; }
+    public void setReplyIds() { this.replyIds = new ArrayList<>(); }
     public int addReplyId(int id)
     {
         ArrayList<int> currIds = getReplyIds();
@@ -111,6 +111,7 @@ public class Post {
 
     // get replies
     public ArrayList<Reply> getReplies() { return replies; }
+    public void setReplies() {this.replies = new ArrayList<>(); }
     // add replies
     public void addToReplies(Reply reply)
     {

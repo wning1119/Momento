@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "com.example.ningwang.momento"
+        applicationId "com.example.sungyup.cs130"
         minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
@@ -17,6 +17,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
     }
 }
 
@@ -33,14 +40,19 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:9.8.0'
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.google.android.gms:play-services:9.8.0'
-    compile 'com.amazonaws:aws-android-sdk-core:2.2.+'
-    compile 'com.amazonaws:aws-android-sdk-ddb:2.2.+'
-    compile 'com.amazonaws:aws-android-sdk-s3:2.2.+'
-    compile 'com.amazonaws:aws-android-sdk-ddb-mapper:2.2.+'
-    compile 'com.amazonaws:aws-android-sdk-cognito:2.2.+'
-    compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.2.+'
-    compile 'com.amazonaws:aws-android-sdk-kms:2.2.+'
+    compile 'com.google.firebase:firebase-database:9.2.0'
+    compile 'com.firebase:firebase-client-android:2.3.1'
+    compile 'com.firebaseui:firebase-ui:0.4.3'
+    compile 'com.google.firebase:firebase-storage:9.2.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+//    compile 'com.amazonaws:aws-android-sdk-core:2.2.+'
+//    compile 'com.amazonaws:aws-android-sdk-ddb:2.2.+'
+//    compile 'com.amazonaws:aws-android-sdk-s3:2.2.+'
+//    compile 'com.amazonaws:aws-android-sdk-ddb-mapper:2.2.+'
+//    compile 'com.amazonaws:aws-android-sdk-cognito:2.2.+'
+//    compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.2.+'
+//    compile 'com.amazonaws:aws-android-sdk-kms:2.2.+'
 
 }
 
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'

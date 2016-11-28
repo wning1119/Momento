@@ -58,8 +58,8 @@ public class PostTest extends TestCase {
     @Test
     public void testOwnerId()
     {
-        post.setOwner(3);
-        assertEquals(3, post.getOwner());
+        post.setOwner("3");
+        assertEquals("3", post.getOwner());
     }
 
     @Test

@@ -22,8 +22,8 @@ public class UserTest extends TestCase {
     @Test
     public void testUserInfo()
     {
-        user.setUserInfo(1, "a");
-        assertEquals(1, user.getUser_id());
+        user.setUserInfo("1", "a");
+        assertEquals("1", user.getUser_id());
         assertEquals("a", user.getUser_name());
     }
 }

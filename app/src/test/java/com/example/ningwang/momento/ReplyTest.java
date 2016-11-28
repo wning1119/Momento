@@ -20,8 +20,8 @@ public class ReplyTest extends TestCase {
 
     @Test
     public void testOwnerId() {
-        reply.setOwner(3);
-        assertEquals(3, reply.getOwner());
+        reply.setOwner("3");
+        assertEquals("3", reply.getOwner());
     }
 
     @Test

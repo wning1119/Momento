@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="fa3bf1895cd5bac042601d4b01fcc2a413f1c792">
+        sha1="a3a5989d1b714b7c3de54004ee67cc7f8c251979">
         <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_ef5995299b7d71b3fa3437b928bc05304d5c1668/classes.dex" />
     </item>
     <item
@@ -93,12 +93,30 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-storage-common/9.6.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5e651c1430cc9b8a3b3b5a9d92bb173214dfdf42">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-storage-common-9.6.0_10ce9e7422a2a56e14637bc104560549f64c66eb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/ningwang/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.0.0/support-annotations-24.0.0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
         <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.0.0_04453324cf9ecb7808923943a8d7d6560ed1ce67/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ningwang/Desktop/Momento/app/build/intermediates/exploded-aar/com.google.firebase/firebase-storage/9.6.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="de2c50f4a24277d22d675d598640da6d4622b14d">
+        <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-storage-9.6.0_b061f8eff3e5f73afc741755db9c42f5440b075e/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -151,7 +169,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="ec9b3a5da290947b61a9a25e10eef916e5d5d8c3">
+        sha1="32e78eeb4486d87082f1aa4aaa272264728f17b6">
         <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_39e2bb9ed38efbe9df0a65004517bbe810a8796e/classes.dex" />
     </item>
 

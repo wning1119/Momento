@@ -19,12 +19,20 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.FirebaseStorage;
+import java.io.ByteArrayOutputStream;
+import com.google.firebase.storage.UploadTask;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import android.support.annotation.NonNull;
 
 public class NewPostActivity extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST = 10;
     public static final int GALLERY_REQUEST = 11;
     private ImageView imgSpecimentPhoto;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +86,15 @@ public class NewPostActivity extends AppCompatActivity {
                 //Post ID: set to -1. databse will handle it
                 int postID = -1;
 
+                //photo
+                if (bitmap != null)
+                    storeImage(postID);
+
                 Post newPost = new Post(favorite, timeout, subject, detail, timestamp, longitude, latitude, category, replies, ownerID, postID);
 
                 //API call to write post
                 //writePostToDB(User user, Post post);
+
 
                 goToMainActivity();
             }
@@ -106,21 +119,48 @@ public class NewPostActivity extends AppCompatActivity {
         startActivityForResult(galleryIntent, GALLERY_REQUEST);
     }
 
+    // store image in firebase with name "postID.jpg"
+    public void storeImage(int id) {
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] image = baos.toByteArray();
+
+        // Create a storage reference from our app
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://momento-758c2.appspot.com");
+        StorageReference imagesRef = storageRef.child(String.valueOf(id) + ".jpg");
+
+        UploadTask uploadTask = imagesRef.putBytes(image);
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                Toast.makeText(NewPostActivity.this, "successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK) {
             if (requestCode == CAMERA_REQUEST) {
-                Bitmap cameraImage = (Bitmap) data.getExtras().get("data");
-                imgSpecimentPhoto.setImageBitmap(cameraImage);
+//                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                bitmap = (Bitmap) data.getExtras().get("data");
+                imgSpecimentPhoto.setImageBitmap(bitmap);
+
             }
 
             if(requestCode == GALLERY_REQUEST){
                 Uri imageUri = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                     imgSpecimentPhoto.setImageBitmap(bitmap);
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -128,3 +168,6 @@ public class NewPostActivity extends AppCompatActivity {
         }
     }
 }
+
+
+

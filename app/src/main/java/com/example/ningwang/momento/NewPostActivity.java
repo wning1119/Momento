@@ -87,8 +87,11 @@ public class NewPostActivity extends AppCompatActivity {
                 int postID = -1;
 
                 //photo
-                if (bitmap != null)
-                    storeImage(postID);
+                if (bitmap != null) {
+                    Image image = new Image(bitmap, String.valueOf(postID) + ".jpg");
+                    image.storeImage();
+
+                }
 
                 Post newPost = new Post(favorite, timeout, subject, detail, timestamp, longitude, latitude, category, replies, ownerID, postID);
 
@@ -119,28 +122,7 @@ public class NewPostActivity extends AppCompatActivity {
         startActivityForResult(galleryIntent, GALLERY_REQUEST);
     }
 
-    // store image in firebase with name "postID.jpg"
-    public void storeImage(int id) {
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] image = baos.toByteArray();
-
-        // Create a storage reference from our app
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://momento-758c2.appspot.com");
-        StorageReference imagesRef = storageRef.child(String.valueOf(id) + ".jpg");
-
-        UploadTask uploadTask = imagesRef.putBytes(image);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                Toast.makeText(NewPostActivity.this, "successfully!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -150,7 +132,6 @@ public class NewPostActivity extends AppCompatActivity {
 //                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 bitmap = (Bitmap) data.getExtras().get("data");
                 imgSpecimentPhoto.setImageBitmap(bitmap);
-
             }
 
             if(requestCode == GALLERY_REQUEST){
@@ -159,7 +140,6 @@ public class NewPostActivity extends AppCompatActivity {
 //                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                     imgSpecimentPhoto.setImageBitmap(bitmap);
-
 
                 } catch (IOException e) {
                     e.printStackTrace();

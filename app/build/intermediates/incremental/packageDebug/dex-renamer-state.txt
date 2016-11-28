@@ -1,4 +1,4 @@
-#Sun Nov 27 22:47:43 PST 2016
+#Mon Nov 28 01:51:07 PST 2016
 base.0=/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_39e2bb9ed38efbe9df0a65004517bbe810a8796e
 renamed.1=classes2.dex
 renamed.0=classes.dex

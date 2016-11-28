@@ -207,6 +207,7 @@ public class DatabaseAPIs {
     	*/
     	
     	//add to category-post table
+    	/*
     	String postInCategoryTableName = "PostInCategory";
     	Table postInCategoryTable = dynamoDB.getTable(postInCategoryTableName);
     	ArrayList<String> categories = post.getCategory();
@@ -231,6 +232,7 @@ public class DatabaseAPIs {
         					.withList(":l",posts));
             postInCategoryTable.updateItem(updateItemSpec);
     	}
+    	*/
     }
     
     
@@ -426,53 +428,31 @@ public class DatabaseAPIs {
     
     public static List<Post> searchPostsWithCategory(String category){
     	//search the category-post table and get the list of posts
-    	String tableName = "PostInCategory";
-    	Table categoryTable = dynamoDB.getTable(tableName);
-    	//firstly query table to get current mypost
-    	QuerySpec spec = new QuerySpec()
-                .withKeyConditionExpression("category = :c")
-                .withValueMap(new ValueMap()
-                		.withString(":c", category));
-        ItemCollection<QueryOutcome> items = categoryTable.query(spec);
-        Iterator<Item> iterator = items.iterator();
-        List<Integer> postIds = new ArrayList<>();
-        while (iterator.hasNext()) {
-        	postIds = iterator.next().getList("postIds"); 
-        }
-        List<Post> posts = new ArrayList<>();
-        Iterator it = postIds.iterator();
-        while(it.hasNext()){        	
-        	BigDecimal b= (BigDecimal) it.next();//Integer.parseInt(s);
-        	String s = b.toString();
-        	int id = Integer.parseInt(s);
-        	//query the Reply table, get corresponding reply, add to list
-        	String postTableName = "Post";
-        	Table postTable = dynamoDB.getTable(postTableName);
-        	Post p = null;
-        	//query Reply table
-        	QuerySpec spec1 = new QuerySpec()
-                    .withKeyConditionExpression("postId = :id")
-                    .withValueMap(new ValueMap()
-                    		.withInt(":id", id));
-            ItemCollection<QueryOutcome> items1 = postTable.query(spec1);
-            Iterator<Item> iterator1 = items1.iterator();
-            while (iterator1.hasNext()) {
-            	Item entry = iterator1.next();
-            	List<String> categories = entry.getList("category");
-            	Post temp = new Post();
-            	temp.setId(entry.getInt("postId"));
-            	List<Reply> replies=getReplyForPost(temp);
-            	p=new Post(
-            			entry.getInt("favorite"),entry.getInt("timeout"),
-            			entry.getString("subject"),entry.getString("detail"),
-            			Timestamp.valueOf(entry.getString("Timestamp")),
-            			entry.getDouble("longitude"),entry.getDouble("latitude"),
-            			(ArrayList<String>)categories,(ArrayList<Reply>)replies,
-            			entry.getString("ownerId"),entry.getInt("postId"));
-            	posts.add(p);
-            	}  
-            }        
-        return posts;    	 
+    	List<Post> posts = new ArrayList<>();
+    	String postTableName = "Post";
+    	Table postTable = dynamoDB.getTable(postTableName);
+    	ItemCollection<ScanOutcome> items = postTable.scan(); //get all posts
+    	Iterator<Item> iterator = items.iterator();
+    	while (iterator.hasNext()) {
+        	Item entry = iterator.next();
+        	List<String> categories = entry.getList("category");
+        	if(!categories.contains(category) )//not contain keyword
+        		continue;
+        	//now this post is valid, add to post list        	
+        	//get the list of reply and query reply table to get
+        	Post temp = new Post();
+        	temp.setId(entry.getInt("postId"));
+        	List<Reply> replies=getReplyForPost(temp);
+        	Post p=new Post(
+        			entry.getInt("favorite"),entry.getInt("timeout"),
+        			entry.getString("subject"),entry.getString("detail"),
+        			Timestamp.valueOf(entry.getString("Timestamp")),
+        			entry.getDouble("longitude"),entry.getDouble("latitude"),
+        			(ArrayList<String>)categories,(ArrayList<Reply>)replies,
+        			entry.getString("ownerId"),entry.getInt("postId"));
+        	posts.add(p);
+    	}
+    	return posts;   	 
         }
     
     /**

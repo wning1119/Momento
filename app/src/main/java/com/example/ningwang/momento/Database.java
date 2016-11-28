@@ -45,7 +45,7 @@ public class Database {
 
         // set default values
         post.setFavorite(0);
-        post.setReplyIds();
+        post.setReplyIds(new ArrayList<>());
         post.setReplies();
         post.setPostId(postCount);
         post.setTimestamp();

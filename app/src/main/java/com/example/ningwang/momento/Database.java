@@ -6,6 +6,10 @@ import com.amazonaws.services.dynamodbv2.*;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 import com.amazonaws.services.dynamodbv2.model.*;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Database {
     private AmazonDynamoDBClient ddbClient;
@@ -82,8 +86,8 @@ public class Database {
     public List<Reply> getRepliesForPost(Post post){
         List<int> replyIds = post.getReplyIds();
         List<Reply> replies = new ArrayList<>();
-        for (int replyId : replyIds) {
-            replies.add(mapper.load(Reply.class, replyId));
+        for (int id : replyIds) {
+            replies.add(mapper.load(Reply.class, id));
         }
 
         return replies;
@@ -101,6 +105,15 @@ public class Database {
         mapper.save(selectedPost);
     }
 
+    public int calculateTimeoutSeconds (int numFavs, int timeout) {
+        return (numFavs * 60 + timeout * 60 * 60);
+    }
+    public boolean notTimedOut(int timeoutVal, Timestamp created, Timestamp currentTime)
+    {
+        Timestamp newTime = new Timestamp(created.getTime() + timeoutVal * 1000);
+        return (current.compareTo(newTime) == 1));
+    }
+
     /**
      * search posts with given category
      * <p>
@@ -109,8 +122,32 @@ public class Database {
      * @return List of Post
      */
 
-    public List<Post> searchPostsWithCategory(String category){
+    public List<Post> searchPostsWithCategory(String category) {
+        List<Post> searchResults = newArrayList<>();
 
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression);
+
+        Timestamp currentTime = new Timestamp(new Data().getTime());
+        for (Post p : result)
+        {
+            int timeoutVal = calculateTimeoutSeconds(p.getFavorite(), p.getTimeout());
+            if (!notTimedOut(timeoutVal, p.getTimestamp(), currentTime))
+            {
+                continue;
+            }
+            ArrayList<String> categories = p.getCategory();
+            for (String s : categories)
+            {
+                if (s.matches(category))
+                {
+                    searchResults.add(p);
+                    break;
+                }
+            }
+        }
+
+        return searchResults;
     }
 
     /**
@@ -121,8 +158,27 @@ public class Database {
      * @return List of Post
      */
 
-    public List<Post> searchPostsWithKeyword(String keyword){
+    public List<Post> searchPostsWithKeyword(String keyword) {
+        List<Post> searchResults = newArrayList<>();
 
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression);
+
+        Timestamp currentTime = new Timestamp(new Data().getTime());
+
+        for (Post p : result)
+        {
+            int timeoutVal = calculateTimeoutSeconds(p.getFavorite(), p.getTimeout());
+            if (!notTimedOut(timeoutVal, p.getTimestamp(), currentTime))
+            {
+                continue;
+            }
+            String postDetails = p.getDetail();
+            if (postDetails.contains(keyword))
+                searchResults.add(p);
+        }
+
+        return searchResults;
     }
 
 
@@ -137,8 +193,28 @@ public class Database {
      * @return List of Post
      */
 
-    public List<Post> searchPostsWithLocation(Double lowlatitude,
-                                                     Double highlatitude, Double lowlongitude, Double highlongitude){
+    public List<Post> searchPostsWithLocation (Double lowlatitude, Double highlatitude, Double lowlongitude, Double highlongitude){
+        List<Post> searchResults = newArrayList<>();
 
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        PaginatedScanList<Post> result = mapper.scan(Post.class, scanExpression);
+
+        Timestamp currentTime = new Timestamp(new Data().getTime());
+
+        for (Post p : result)
+        {
+            int timeoutVal = calculateTimeoutSeconds(p.getFavorite(), p.getTimeout());
+            if (!notTimedOut(timeoutVal, p.getTimestamp(), currentTime))
+            {
+                continue;
+            }
+            Double plat = p.getLatitude();
+            Double plong = p.getLongitude();
+            if (plat >= lowlatitude && plat <= highlatitude &&
+                plong >= lowlatitude && plong <= highlongitude)
+                searchResults.add(p);
+        }
+
+        return searchResults;
     }
 }

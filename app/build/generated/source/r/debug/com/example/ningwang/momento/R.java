@@ -2089,12 +2089,13 @@ containing a value of this type.
         public static final int ic_action_add=0x7f020052;
         public static final int ic_action_picture=0x7f020053;
         public static final int ic_camera_enhance=0x7f020054;
-        public static final int ic_view_headline=0x7f020055;
-        public static final int momento=0x7f020056;
-        public static final int notification_template_icon_bg=0x7f02005a;
-        public static final int rounded_button=0x7f020057;
-        public static final int rounded_corner=0x7f020058;
-        public static final int snackbar_background=0x7f020059;
+        public static final int ic_search_black_24dp=0x7f020055;
+        public static final int ic_view_headline=0x7f020056;
+        public static final int momento=0x7f020057;
+        public static final int notification_template_icon_bg=0x7f02005b;
+        public static final int rounded_button=0x7f020058;
+        public static final int rounded_corner=0x7f020059;
+        public static final int snackbar_background=0x7f02005a;
     }
     public static final class id {
         public static final int action0=0x7f0c0097;
@@ -2215,6 +2216,7 @@ containing a value of this type.
         public static final int scroll=0x7f0c0017;
         public static final int scrollView=0x7f0c0051;
         public static final int scrollable=0x7f0c003b;
+        public static final int search=0x7f0c00a8;
         public static final int search_badge=0x7f0c0063;
         public static final int search_bar=0x7f0c0062;
         public static final int search_button=0x7f0c0064;
@@ -2334,6 +2336,7 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
+        public static final int search=0x7f0d0001;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;

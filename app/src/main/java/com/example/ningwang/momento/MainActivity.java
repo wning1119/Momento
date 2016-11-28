@@ -13,8 +13,11 @@ import android.support.design.widget.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import android.view.View;
 import android.content.Intent;
+import android.support.v7.widget.SearchView;
+import android.support.v4.view.MenuItemCompat;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.search, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+
         return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        // User pressed the search button
+        Toast.makeText(MainActivity.this, "searching", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        // User changed the text
+        return false;
     }
 
     @Override

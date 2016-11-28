@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/ningwang/Desktop/Momento/app/build/intermediates/res/merged/debug/menu/search.xml",
+        "source": "/Users/ningwang/Desktop/Momento/app/src/main/res/menu/search.xml"
+    },
+    {
         "merged": "/Users/ningwang/Desktop/Momento/app/build/intermediates/res/merged/debug/menu/main.xml",
         "source": "/Users/ningwang/Desktop/Momento/app/src/main/res/menu/main.xml"
     }

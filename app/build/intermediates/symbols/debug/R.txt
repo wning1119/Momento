@@ -543,12 +543,13 @@ int drawable fab_background 0x7f020051
 int drawable ic_action_add 0x7f020052
 int drawable ic_action_picture 0x7f020053
 int drawable ic_camera_enhance 0x7f020054
-int drawable ic_view_headline 0x7f020055
-int drawable momento 0x7f020056
-int drawable notification_template_icon_bg 0x7f02005a
-int drawable rounded_button 0x7f020057
-int drawable rounded_corner 0x7f020058
-int drawable snackbar_background 0x7f020059
+int drawable ic_search_black_24dp 0x7f020055
+int drawable ic_view_headline 0x7f020056
+int drawable momento 0x7f020057
+int drawable notification_template_icon_bg 0x7f02005b
+int drawable rounded_button 0x7f020058
+int drawable rounded_corner 0x7f020059
+int drawable snackbar_background 0x7f02005a
 int id action0 0x7f0c0097
 int id action_allPosts 0x7f0c00a4
 int id action_bar 0x7f0c005f
@@ -667,6 +668,7 @@ int id screen 0x7f0c003e
 int id scroll 0x7f0c0017
 int id scrollView 0x7f0c0051
 int id scrollable 0x7f0c003b
+int id search 0x7f0c00a8
 int id search_badge 0x7f0c0063
 int id search_bar 0x7f0c0062
 int id search_button 0x7f0c0064
@@ -780,6 +782,7 @@ int layout select_dialog_multichoice_material 0x7f040034
 int layout select_dialog_singlechoice_material 0x7f040035
 int layout support_simple_spinner_dropdown_item 0x7f040036
 int menu main 0x7f0d0000
+int menu search 0x7f0d0001
 int mipmap ic_launcher 0x7f030000
 int string abc_action_bar_home_description 0x7f060000
 int string abc_action_bar_home_description_format 0x7f060021

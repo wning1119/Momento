@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="a28db20fa28538b29a83bd2c5dc18692c2b73f0d">
+        sha1="fa3bf1895cd5bac042601d4b01fcc2a413f1c792">
         <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_ef5995299b7d71b3fa3437b928bc05304d5c1668/classes.dex" />
     </item>
     <item
@@ -151,7 +151,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="3c079ea56f17be154d40fd91007db676dda116a5">
+        sha1="ec9b3a5da290947b61a9a25e10eef916e5d5d8c3">
         <dex dex="/Users/ningwang/Desktop/Momento/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_39e2bb9ed38efbe9df0a65004517bbe810a8796e/classes.dex" />
     </item>
 

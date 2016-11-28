@@ -50,11 +50,11 @@ public class MyPostsActivity extends AppCompatActivity {
                 for(com.firebase.client.DataSnapshot postSnapShot : dataSnapshot.getChildren()){
                     count++;
                     System.out.println("count="+count);
-                    Long timestamp = postSnapShot.child("timestamp").getValue(Long.class);
+                    //Long timestamp = postSnapShot.child("timestamp").getValue(Long.class);
                     String subject = postSnapShot.child("subject").getValue(String.class);
                     String detail = postSnapShot.child("detail").getValue(String.class);
 
-                    MyPosts newPost = new MyPosts(0, 0, subject, detail, timestamp, 0, 0, null, null, null, "", 0);
+                    MyPosts newPost = new MyPosts(0, 0, subject, detail, 0, 0, 0, null, null, null, "", 0);
                     myPosts.add(newPost);
                 }
                 populateListView();
@@ -94,7 +94,7 @@ public class MyPostsActivity extends AppCompatActivity {
             contentText.setText(currentPost.getDetail());
 
             TextView dateText = (TextView)itemView.findViewById(R.id.txtDate);
-            dateText.setText("" + currentPost.getTimestamp());
+            dateText.setText("");
 
             return itemView;
         }

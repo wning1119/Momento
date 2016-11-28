@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -80,7 +81,8 @@ public class activity_viewposts extends AppCompatActivity {
                             String detail = child.child("detail").getValue(String.class);
                             Subject.setText(subject);
                             Detail.setText(detail);
-                            Date.setText(""+timestamp);
+                            java.util.Date d = new Date(timestamp);
+                            Date.setText(d.toString());
 
                         }
                     }
